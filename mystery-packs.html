@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Degen Mystery Packs | Silver Degen</title>
+  <meta name="description" content="Sealed mystery packs of hand-picked silver coins. Graded slabs, junk silver, and surprise inserts. Coming soon from Silver Degen." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --s1: #B8C8D4;
+      --s2: #DCE8F0;
+      --s4: #8A9EAE;
+      --ink: #0C0E12;
+      --smoke: #F4F6F8;
+      --mid: #DDE3E8;
+      --muted: #7A8898;
+      --white: #FFFFFF;
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      --max: 900px;
+    }
+
+    body {
+      font-family: var(--font-body); background: var(--ink); color: var(--white);
+      -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column;
+    }
+
+    .page-bg {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 40%, rgba(184,200,212,0.14) 0%, transparent 65%),
+        radial-gradient(ellipse 30% 40% at 90% 80%, rgba(138,158,174,0.07) 0%, transparent 60%);
+    }
+    .page-grid {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.03;
+      background-image: linear-gradient(rgba(184,200,212,1) 1px, transparent 1px), linear-gradient(90deg, rgba(184,200,212,1) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    nav {
+      padding: 20px 32px; display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.07); position: relative; z-index: 1;
+    }
+    .nav-logo { font-family: var(--font-display); font-size: 1.25rem; color: var(--white); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .nav-logo img { width: 32px; height: 32px; object-fit: contain; }
+    .nav-logo span { color: var(--s1); }
+    .nav-back { font-size: 0.85rem; color: rgba(255,255,255,0.4); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .nav-back:hover { color: var(--s2); }
+
+    main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 60px 24px; position: relative; z-index: 1; }
+    .container { max-width: var(--max); width: 100%; text-align: center; }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(184,200,212,0.12); border: 1px solid rgba(184,200,212,0.25);
+      color: var(--s2); font-size: 0.73rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 7px 16px; border-radius: 100px; margin-bottom: 28px;
+    }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--s2); animation: blink 2s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    h1 { font-family: var(--font-display); font-size: clamp(3rem,7vw,5.5rem); line-height: 1.0; letter-spacing: -0.02em; margin-bottom: 24px; }
+    h1 em { color: var(--s2); font-style: italic; display: block; }
+
+    .tagline { font-size: 1.1rem; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 580px; margin: 0 auto 48px; }
+
+    .features { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 52px; }
+    .feature-pill {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(184,200,212,0.15);
+      padding: 10px 18px; border-radius: 100px; font-size: 0.85rem; color: rgba(255,255,255,0.65);
+    }
+    .feature-pill span { font-size: 1rem; }
+
+    .waitlist-card {
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(184,200,212,0.12);
+      border-radius: 24px; padding: 48px 40px; max-width: 520px; margin: 0 auto;
+    }
+    .waitlist-card h2 { font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 8px; }
+    .waitlist-card > p { font-size: 0.88rem; color: rgba(255,255,255,0.4); margin-bottom: 28px; }
+    .input-row { display: flex; gap: 10px; }
+    .wl-input {
+      flex: 1; padding: 14px 16px; border-radius: 10px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--white); font-family: var(--font-body); font-size: 0.95rem;
+      outline: none; transition: border-color 0.2s;
+    }
+    .wl-input::placeholder { color: rgba(255,255,255,0.25); }
+    .wl-input:focus { border-color: var(--s1); }
+    .wl-btn {
+      padding: 14px 22px; border-radius: 10px; white-space: nowrap;
+      background: var(--s1); color: var(--ink);
+      font-family: var(--font-body); font-size: 0.9rem; font-weight: 600;
+      border: none; cursor: pointer; transition: background 0.2s;
+    }
+    .wl-btn:hover { background: var(--s2); }
+    .wl-legal { font-size: 0.72rem; color: rgba(255,255,255,0.25); margin-top: 14px; }
+    .wl-success { display: none; padding: 20px; color: var(--s2); font-size: 1rem; text-align: center; }
+    .wl-success .big { font-family: var(--font-display); font-size: 1.8rem; display: block; margin-bottom: 8px; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 40px;
+      font-size: 0.88rem; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--s2); }
+
+    footer {
+      text-align: center; padding: 24px; font-size: 0.76rem; color: rgba(255,255,255,0.2);
+      border-top: 1px solid rgba(255,255,255,0.06); position: relative; z-index: 1;
+    }
+
+    @media (max-width: 500px) {
+      .input-row { flex-direction: column; }
+      .waitlist-card { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page-bg"></div>
+<div class="page-grid"></div>
+
+<nav>
+  <a class="nav-logo" href="index.html"><img src="logo.png" alt="Silver Degen bull logo" />Silver<span>Degen</span></a>
+  <a class="nav-back" href="index.html">← Back to Home</a>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="badge"><span class="badge-dot"></span>Coming Soon</div>
+    <img src="logo.png" alt="Silver Degen" style="width:100px;height:100px;object-fit:contain;margin-bottom:20px;display:block;margin-left:auto;margin-right:auto;filter:drop-shadow(0 0 28px rgba(184,200,212,0.3));" />
+    <h1>Degen Mystery<br><em>Packs</em></h1>
+    <p class="tagline">Sealed bags of hand-picked silver — graded slabs, classic junk silver, and surprise inserts. Every pack is different. Every pack is real metal. The thrill of the show, delivered to your door.</p>
+    <div class="features">
+      <div class="feature-pill"><span>🔒</span> Sealed & mystery</div>
+      <div class="feature-pill"><span>🪙</span> Real graded silver</div>
+      <div class="feature-pill"><span>🎲</span> Surprise inserts</div>
+      <div class="feature-pill"><span>📦</span> Ships to your door</div>
+      <div class="feature-pill"><span>🔴</span> Live X reveals</div>
+    </div>
+    <div class="waitlist-card">
+      <h2>Join the Waitlist</h2>
+      <p>Be first to know when Degen Mystery Packs drop. Waitlist members get early access and a discount on their first pack.</p>
+      <div id="wlForm">
+        <div class="input-row">
+          <input class="wl-input" type="email" id="wlEmail" placeholder="your@email.com" />
+          <button class="wl-btn" onclick="joinWaitlist()">Notify Me</button>
+        </div>
+        <p class="wl-legal">No spam. Just a heads-up when packs go live. Unsubscribe anytime.</p>
+      </div>
+      <div class="wl-success" id="wlSuccess">
+        <span class="big">🎁 You're on the list!</span>
+        We'll hit you first when Degen Mystery Packs are ready to ship.
+      </div>
+    </div>
+    <a class="back-link" href="index.html">← Back to SilverDegen.com</a>
+  </div>
+</main>
+
+<footer>© 2026 SilverDegen.com · All rights reserved</footer>
+
+<script>
+  function joinWaitlist() {
+    const email = document.getElementById('wlEmail').value.trim();
+    if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+    // TODO: wire to your email service
+    console.log('Waitlist signup:', email);
+    document.getElementById('wlForm').style.display = 'none';
+    document.getElementById('wlSuccess').style.display = 'block';
+  }
+  document.getElementById('wlEmail').addEventListener('keydown', e => {
+    if (e.key === 'Enter') joinWaitlist();
+  });
+</script>
+</body>
+</html>
