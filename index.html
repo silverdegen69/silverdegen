@@ -113,7 +113,7 @@
   <img class="logo" src="logo.png" alt="Silver Degen" />
 
   <a class="live-badge" href="https://www.whatnot.com/user/silverdegen" target="_blank">
-    <span class="live-dot"></span>Wed & Sat · 8PM EST
+    <span class="live-dot"></span>Every Saturday · 8PM EST
   </a>
 
   <div class="site-title">SilverDegen</div>
@@ -200,7 +200,7 @@
   <a class="whatnot-card" href="https://www.whatnot.com/user/silverdegen" target="_blank">
     <div class="card-header">
       <div class="card-icon" style="background:rgba(255,100,50,0.15);">🔴</div>
-      <div><div class="card-title">Watch Live on WhatNot</div><div class="card-sub">Every Wed & Sat · 8PM EST</div></div>
+      <div><div class="card-title">Watch Live on WhatNot</div><div class="card-sub">Every Saturday · 8PM EST</div></div>
       <div style="margin-left:auto;color:rgba(255,255,255,0.2);font-size:14px;">→</div>
     </div>
     <div class="feature-grid">
@@ -309,15 +309,20 @@
 <script>
   /* ── GIVEAWAY DEADLINE COUNTDOWN ── */
   function getNextSaturday8PM() {
-    const estOffset = -5 * 60;
-    const utcMinutes = Date.now() / 60000 + new Date().getTimezoneOffset();
-    const estNow = new Date((utcMinutes + estOffset) * 60000);
-    const day = estNow.getDay();
-    const daysUntilSat = day === 6 && estNow.getHours() < 20 ? 0 : (6 - day + 7) % 7 || 7;
-    const target = new Date(estNow);
-    target.setDate(target.getDate() + daysUntilSat);
-    target.setHours(20, 0, 0, 0);
-    return target.getTime() - estOffset * 60000;
+    const now = new Date();
+    const target = new Date(now);
+    const day = now.toLocaleDateString('en-US', {weekday:'short', timeZone:'America/New_York'});
+    const hour = parseInt(now.toLocaleTimeString('en-US', {hour:'numeric', hour12:false, timeZone:'America/New_York'}));
+    const daysMap = {Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
+    const currentDay = daysMap[day.slice(0,3)] ?? 0;
+    let daysUntilSat = (6 - currentDay + 7) % 7;
+    if (daysUntilSat === 0 && hour >= 22) daysUntilSat = 7;
+    if (daysUntilSat === 0 && hour < 20) daysUntilSat = 0;
+    const sat = new Date(now);
+    sat.setDate(now.getDate() + daysUntilSat);
+    const satStr = sat.toLocaleDateString('en-CA') + 'T20:00:00';
+    return new Date(new Date(satStr).toLocaleString('en-US', {timeZone:'America/New_York'}) + ' EDT').getTime() ||
+           new Date(satStr.replace('T', ' ') + ' EDT').getTime();
   }
   function updateGwDeadline() {
     const diff = Math.max(0, (getNextSaturday8PM() - Date.now()) / 1000);
@@ -379,26 +384,20 @@
   /* ── SHOW COUNTDOWN ── */
   function getNextShow() {
     const now = new Date();
-    const estOffset = -5 * 60;
-    const utcMinutes = now.getTime() / 60000 + now.getTimezoneOffset();
-    const estNow = new Date((utcMinutes + estOffset) * 60000);
-    const day = estNow.getDay(); const hour = estNow.getHours(); const min = estNow.getMinutes();
-    const showDays = [3, 6]; const showHour = 20;
-    for (const sd of showDays) { if (day === sd && hour >= showHour && hour < showHour + 2) return { live: true }; }
-    let daysUntil = null; let nextDayName = '';
-    for (let offset = 0; offset <= 7; offset++) {
-      const checkDay = (day + offset) % 7;
-      if (showDays.includes(checkDay)) {
-        if (offset === 0 && (hour > showHour + 2 || (hour === showHour + 2 && min > 0))) continue;
-        if (offset === 0 && hour < showHour) { daysUntil = 0; nextDayName = checkDay === 3 ? 'Wednesday' : 'Saturday'; break; }
-        if (offset > 0) { daysUntil = offset; nextDayName = checkDay === 3 ? 'Wednesday' : 'Saturday'; break; }
-      }
-    }
-    if (daysUntil === null) { daysUntil = 7; nextDayName = 'Wednesday'; }
-    const target = new Date(estNow);
-    target.setDate(target.getDate() + daysUntil);
-    target.setHours(showHour, 0, 0, 0);
-    return { live: false, targetUTC: target.getTime() - estOffset * 60000, name: nextDayName };
+    const nyDay = now.toLocaleDateString('en-US', {weekday:'short', timeZone:'America/New_York'}).slice(0,3);
+    const nyHour = parseInt(now.toLocaleTimeString('en-US', {hour:'numeric', hour12:false, timeZone:'America/New_York'}));
+    const nyMin = parseInt(now.toLocaleTimeString('en-US', {minute:'numeric', timeZone:'America/New_York'}));
+    const daysMap = {Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
+    const day = daysMap[nyDay] ?? 0;
+    const showHour = 20;
+    if (day === 6 && nyHour >= showHour && nyHour < showHour + 2) return { live: true };
+    let daysUntil = (6 - day + 7) % 7;
+    if (daysUntil === 0 && (nyHour > showHour + 1)) daysUntil = 7;
+    const target = new Date(now);
+    target.setDate(now.getDate() + daysUntil);
+    const dateStr = target.toLocaleDateString('en-CA') + 'T20:00:00';
+    const targetTime = new Date(dateStr + '-04:00').getTime();
+    return { live: false, targetUTC: targetTime, name: 'Saturday' };
   }
 
   function pad(n) { return String(Math.floor(n)).padStart(2, '0'); }
