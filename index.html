@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Silver Degen | Live Coin & Bullion Auctions</title>
-  <meta name="description" content="Live coin & bullion auctions every Wednesday & Saturday at 8PM EST on WhatNot. 30 Silver Eagles given away every Saturday. Free silver every 5 minutes." />
-  <meta property="og:title" content="Silver Degen | Live Coin & Bullion Auctions" />
-  <meta property="og:description" content="Win 30 × 2026 American Silver Eagles. Enter free — winner drawn live May 2nd on WhatNot." />
+  <title>SilverDegen | Live Silver Auctions · Free Silver Every Saturday</title>
+  <meta name="description" content="30 American Silver Eagles given away live every Saturday at 8PM EST on WhatNot. Must be present to win. Shop the Official Silver Retard Card." />
+  <meta property="og:title" content="SilverDegen | 30 Free Silver Eagles Every Saturday" />
+  <meta property="og:description" content="Live silver auctions every Saturday 8PM EST on WhatNot. 30 Silver Eagles given away live — must be present to win." />
   <meta property="og:url" content="https://silverdegen.com" />
+  <meta property="og:image" content="https://silverdegen.com/logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Teko:wght@700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -16,89 +17,88 @@
     body { font-family: 'DM Sans', system-ui, sans-serif; background: #0C0E12; color: #fff; min-height: 100vh; display: flex; align-items: center; justify-content: center; -webkit-font-smoothing: antialiased; }
     .bg { position: fixed; inset: 0; z-index: 0; background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(184,200,212,0.13) 0%, transparent 65%), radial-gradient(ellipse 40% 40% at 80% 80%, rgba(138,158,174,0.07) 0%, transparent 60%); }
     .bg-grid { position: fixed; inset: 0; z-index: 0; opacity: 0.03; background-image: linear-gradient(rgba(184,200,212,1) 1px, transparent 1px), linear-gradient(90deg, rgba(184,200,212,1) 1px, transparent 1px); background-size: 48px 48px; }
-    .card { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; padding: 48px 24px; width: 100%; max-width: 480px; animation: fadeUp 0.6s ease both; }
+    .card { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; padding: 48px 24px 40px; width: 100%; max-width: 460px; animation: fadeUp 0.6s ease both; }
     @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-    .logo { width: 400px; height: 400px; object-fit: contain; filter: drop-shadow(0 0 32px rgba(184,200,212,0.3)); margin-bottom: 20px; max-width: 90vw; animation: fadeUp 0.6s ease 0.1s both; }
-    .live-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(184,200,212,0.1); border: 1px solid rgba(184,200,212,0.2); color: #DCE8F0; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 7px 16px; border-radius: 100px; margin-bottom: 20px; text-decoration: none; animation: fadeUp 0.6s ease 0.05s both; }
-    .live-dot { width: 18px; height: 18px; border-radius: 50%; background: #C0392B; display: inline-block; flex-shrink: 0; animation: pulse 1.8s ease-in-out infinite; }
+
+    /* LOGO */
+    .logo { width: 360px; height: 360px; object-fit: contain; filter: drop-shadow(0 0 32px rgba(184,200,212,0.3)); margin-bottom: 16px; max-width: 88vw; animation: fadeUp 0.6s ease 0.1s both; }
+
+    /* LIVE BADGE */
+    .live-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(184,200,212,0.1); border: 1px solid rgba(184,200,212,0.2); color: #DCE8F0; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 7px 16px; border-radius: 100px; margin-bottom: 16px; text-decoration: none; animation: fadeUp 0.6s ease 0.05s both; }
+    .live-dot { width: 14px; height: 14px; border-radius: 50%; background: #C0392B; display: inline-block; flex-shrink: 0; animation: pulse 1.8s ease-in-out infinite; }
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.6)} }
-    .site-title { font-family: 'Teko', sans-serif; font-size: 88px; font-weight: 700; letter-spacing: 0.03em; line-height: 1; text-align: center; white-space: nowrap; background: linear-gradient(180deg, #FFFFFF 0%, #E8E8E8 15%, #A0A8AF 30%, #4A5560 48%, #8A9BAA 62%, #D0DCE4 78%, #FFFFFF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 10px; padding-bottom: 12px; animation: fadeUp 0.6s ease 0.15s both; }
-    .tagline { font-size: 12px; color: rgba(255,255,255,0.35); text-align: center; margin-bottom: 24px; animation: fadeUp 0.6s ease 0.18s both; }
+
+    /* TITLE */
+    .site-title { font-family: 'Teko', sans-serif; font-size: 88px; font-weight: 700; letter-spacing: 0.03em; line-height: 1; text-align: center; white-space: nowrap; background: linear-gradient(180deg, #FFFFFF 0%, #E8E8E8 15%, #A0A8AF 30%, #4A5560 48%, #8A9BAA 62%, #D0DCE4 78%, #FFFFFF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; padding-bottom: 12px; margin-bottom: 22px; animation: fadeUp 0.6s ease 0.15s both; }
 
     /* ICON ROW */
-    .icon-row { display: flex; gap: 14px; justify-content: center; margin-bottom: 32px; animation: fadeUp 0.6s ease 0.22s both; }
+    .icon-row { display: flex; gap: 14px; justify-content: center; margin-bottom: 28px; animation: fadeUp 0.6s ease 0.2s both; }
     .icon-btn { display: flex; flex-direction: column; align-items: center; gap: 7px; text-decoration: none; }
     .icon-circle { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 22px; transition: transform 0.15s; }
     .icon-btn:hover .icon-circle { transform: translateY(-3px); }
     .icon-label { font-size: 9px; color: rgba(255,255,255,0.4); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
 
     /* GIVEAWAY */
-    .giveaway-card { width: 100%; background: linear-gradient(135deg, rgba(184,200,212,0.1) 0%, rgba(184,200,212,0.03) 100%); border: 1px solid rgba(184,200,212,0.35); border-radius: 20px; padding: 24px; margin-bottom: 16px; animation: fadeUp 0.6s ease 0.24s both; }
-    .gw-deadline-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(192,57,43,0.15); border: 1px solid rgba(192,57,43,0.3); color: #ff6b6b; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 12px; border-radius: 100px; margin-bottom: 14px; }
-    .gw-title { font-family: Georgia, serif; font-size: 28px; font-weight: 900; line-height: 1.1; margin-bottom: 6px; background: linear-gradient(180deg, #FFFFFF 0%, #E8E8E8 20%, #A0A8AF 45%, #DCE8F0 80%, #FFFFFF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .gw-sub { font-size: 12px; color: rgba(255,255,255,0.45); margin-bottom: 6px; line-height: 1.6; }
-    .gw-deadline-countdown { font-size: 12px; color: #ff8c7a; font-weight: 600; margin-bottom: 16px; }
-
-    .gw-toggle { display: flex; gap: 8px; margin-bottom: 12px; }
+    .giveaway-card { width: 100%; background: linear-gradient(135deg, rgba(184,200,212,0.1) 0%, rgba(184,200,212,0.03) 100%); border: 1px solid rgba(184,200,212,0.35); border-radius: 20px; padding: 22px; margin-bottom: 14px; animation: fadeUp 0.6s ease 0.24s both; }
+    .gw-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(192,57,43,0.15); border: 1px solid rgba(192,57,43,0.3); color: #ff6b6b; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; margin-bottom: 12px; }
+    .gw-title { font-family: 'Teko', sans-serif; font-size: 32px; font-weight: 700; letter-spacing: 0.02em; line-height: 1; margin-bottom: 6px; background: linear-gradient(180deg, #FFFFFF 0%, #E8E8E8 20%, #A0A8AF 45%, #DCE8F0 80%, #FFFFFF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .gw-sub { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.6; margin-bottom: 6px; }
+    .gw-timer { font-size: 12px; color: #ff8c7a; font-weight: 600; margin-bottom: 16px; }
+    .gw-toggle { display: flex; gap: 8px; margin-bottom: 10px; }
     .gw-toggle-btn { flex: 1; padding: 10px; border-radius: 8px; font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-    .gw-input { width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 13px 16px; color: #fff; font-size: 14px; font-family: inherit; outline: none; margin-bottom: 10px; transition: border-color 0.2s; }
+    .gw-input { width: 100%; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 12px 16px; color: #fff; font-size: 14px; font-family: inherit; outline: none; margin-bottom: 10px; transition: border-color 0.2s; }
     .gw-input:focus { border-color: rgba(184,200,212,0.5); }
-    .gw-submit { width: 100%; background: #DCE8F0; border: none; border-radius: 10px; padding: 14px; font-size: 15px; font-weight: 700; color: #0C0E12; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+    .gw-submit { width: 100%; background: #DCE8F0; border: none; border-radius: 10px; padding: 14px; font-family: 'Teko', sans-serif; font-size: 24px; font-weight: 700; letter-spacing: 0.05em; color: #0C0E12; cursor: pointer; transition: background 0.2s; }
     .gw-submit:hover { background: #fff; }
     .gw-legal { font-size: 10px; color: rgba(255,255,255,0.2); text-align: center; margin-top: 8px; }
-    .gw-success { display: none; text-align: center; padding: 16px 0; }
-    .gw-success-title { font-family: Georgia, serif; font-size: 26px; margin-bottom: 8px; }
+    .gw-success { display: none; text-align: center; padding: 12px 0; }
+    .gw-success-title { font-family: 'Teko', sans-serif; font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #DCE8F0; }
     .gw-success-sub { font-size: 13px; color: rgba(255,255,255,0.45); margin-bottom: 16px; line-height: 1.6; }
-    .share-prompt { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px 16px; margin-top: 4px; }
-    .share-prompt-label { font-size: 11px; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
-    .share-prompt-label strong { color: #DCE8F0; }
-    .share-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 11px; color: #fff; font-size: 13px; font-weight: 600; text-decoration: none; transition: background 0.2s; cursor: pointer; font-family: inherit; }
+    .share-prompt { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px 16px; }
+    .share-prompt p { font-size: 11px; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
+    .share-prompt p strong { color: #DCE8F0; }
+    .share-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 11px; color: #fff; font-size: 13px; font-weight: 600; text-decoration: none; transition: background 0.2s; }
     .share-btn:hover { background: rgba(255,255,255,0.14); }
 
     /* COUNTDOWN */
-    .countdown-wrap { width: 100%; margin-bottom: 20px; animation: fadeUp 0.6s ease 0.28s both; }
-    .countdown-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.35); text-align: center; margin-bottom: 12px; }
+    .countdown-wrap { width: 100%; margin-bottom: 14px; animation: fadeUp 0.6s ease 0.28s both; }
+    .countdown-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.35); text-align: center; margin-bottom: 10px; }
     .countdown-label span { color: #DCE8F0; }
     .countdown-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
-    .countdown-block { background: rgba(184,200,212,0.06); border: 1px solid rgba(184,200,212,0.15); border-radius: 14px; padding: 16px 6px; text-align: center; }
-    .countdown-num { font-family: Georgia, serif; font-size: 48px; font-weight: 900; line-height: 1; background: linear-gradient(180deg, #FFFFFF 0%, #E8E8E8 15%, #A0A8AF 30%, #4A5560 48%, #8A9BAA 62%, #D0DCE4 78%, #FFFFFF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .countdown-unit { font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-top: 3px; }
-    .countdown-live { text-align: center; padding: 20px; font-family: Georgia, serif; font-size: 28px; background: linear-gradient(180deg, #FFFFFF 0%, #DCE8F0 50%, #B8C8D4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .countdown-block { background: rgba(184,200,212,0.06); border: 1px solid rgba(184,200,212,0.15); border-radius: 12px; padding: 14px 6px; text-align: center; }
+    .countdown-num { font-family: 'Teko', sans-serif; font-size: 44px; font-weight: 700; line-height: 1; background: linear-gradient(180deg, #FFFFFF 0%, #E8E8E8 15%, #A0A8AF 30%, #4A5560 48%, #8A9BAA 62%, #D0DCE4 78%, #FFFFFF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .countdown-unit { font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-top: 2px; }
+    .countdown-live { text-align: center; padding: 16px; font-family: 'Teko', sans-serif; font-size: 32px; font-weight: 700; color: #ff6b6b; }
 
     /* WHATNOT CARD */
-    .whatnot-card { width: 100%; background: rgba(255,100,50,0.06); border: 1px solid rgba(255,100,50,0.2); border-radius: 16px; padding: 20px; margin-bottom: 12px; text-decoration: none; color: #fff; display: block; animation: fadeUp 0.6s ease 0.32s both; transition: background 0.2s, transform 0.15s; }
+    .whatnot-card { width: 100%; background: rgba(255,100,50,0.06); border: 1px solid rgba(255,100,50,0.2); border-radius: 16px; padding: 18px; margin-bottom: 12px; text-decoration: none; color: #fff; display: block; animation: fadeUp 0.6s ease 0.32s both; transition: background 0.2s, transform 0.15s; }
     .whatnot-card:hover { background: rgba(255,100,50,0.1); transform: translateY(-2px); }
-    .card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
-    .card-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .card-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
     .card-title { font-size: 14px; font-weight: 600; }
     .card-sub { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
     .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .feature-block { border-radius: 10px; padding: 12px; }
-    .feature-block-icon { font-size: 18px; margin-bottom: 5px; }
-    .feature-block-text { font-size: 11px; font-weight: 600; color: #fff; line-height: 1.4; }
+    .feature-icon { font-size: 16px; margin-bottom: 4px; }
+    .feature-text { font-size: 11px; font-weight: 600; color: #fff; line-height: 1.4; }
 
-    /* SUMMIT CARD */
-    .summit-card { width: 100%; background: rgba(184,200,212,0.05); border: 1px solid rgba(184,200,212,0.25); border-radius: 16px; padding: 20px; margin-bottom: 24px; text-decoration: none; color: #fff; display: block; animation: fadeUp 0.6s ease 0.38s both; transition: background 0.2s, transform 0.15s; }
-    .summit-card:hover { background: rgba(184,200,212,0.1); transform: translateY(-2px); }
+    /* RTD CARD */
+    .rtd-card { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(184,200,212,0.2); border-radius: 16px; padding: 18px; margin-bottom: 28px; text-decoration: none; color: #fff; display: flex; gap: 14px; align-items: center; animation: fadeUp 0.6s ease 0.38s both; transition: background 0.2s, transform 0.15s; }
+    .rtd-card:hover { background: rgba(184,200,212,0.06); transform: translateY(-2px); }
+    .rtd-img { width: 72px; height: 50px; border-radius: 8px; object-fit: cover; border: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; }
+    .rtd-info { flex: 1; }
+    .rtd-badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(192,57,43,0.15); border: 1px solid rgba(192,57,43,0.3); color: #ff8c7a; font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 100px; margin-bottom: 5px; }
+    .rtd-name { font-family: 'Teko', sans-serif; font-size: 19px; font-weight: 700; color: #fff; line-height: 1; letter-spacing: 0.02em; }
+    .rtd-sub { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+    .rtd-price { text-align: right; flex-shrink: 0; }
+    .rtd-price-num { font-family: 'Teko', sans-serif; font-size: 24px; font-weight: 700; color: #DCE8F0; line-height: 1; }
+    .rtd-price-sub { font-size: 10px; color: rgba(255,255,255,0.3); margin-top: 2px; }
 
-    /* VIDEO */
-    .video-section { width: 100%; margin-bottom: 24px; animation: fadeUp 0.6s ease 0.5s both; }
-    .video-card { background: rgba(184,200,212,0.05); border: 1px solid rgba(184,200,212,0.15); border-radius: 16px; padding: 16px; }
-    .video-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-    .video-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(255,0,0,0.12); border: 1px solid rgba(255,0,0,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .video-title { font-size: 13px; font-weight: 600; color: #fff; }
-    .video-channel { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 1px; }
-    .video-embed { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px; }
-    .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 10px; }
-
-    /* X EMBED */
-    .x-section { width: 100%; margin-bottom: 24px; animation: fadeUp 0.6s ease 0.52s both; }
-
-    .footer { margin-top: 8px; font-size: 11px; color: rgba(255,255,255,0.2); animation: fadeUp 0.6s ease 0.55s both; }
+    .footer { font-size: 11px; color: rgba(255,255,255,0.15); animation: fadeUp 0.6s ease 0.42s both; }
 
     @media (max-width: 400px) {
+      .site-title { font-size: 68px; }
       .countdown-num { font-size: 36px; }
-      .site-title { font-size: 52px; }
       .icon-circle { width: 46px; height: 46px; }
       .icon-row { gap: 10px; }
     }
@@ -117,7 +117,6 @@
   </a>
 
   <div class="site-title">SilverDegen</div>
-  <p class="tagline">Live coin & bullion auctions · Real metal, real wins</p>
 
   <!-- ICON ROW -->
   <div class="icon-row">
@@ -149,15 +148,15 @@
     </a>
   </div>
 
-  <!-- GIVEAWAY CARD -->
+  <!-- GIVEAWAY -->
   <div class="giveaway-card">
-    <div class="gw-deadline-badge">
-      <span style="width:6px;height:6px;border-radius:50%;background:#C0392B;display:inline-block;"></span>
-      Every Saturday · 8PM EST · Live on WhatNot
+    <div class="gw-badge">
+      <span style="width:5px;height:5px;border-radius:50%;background:#C0392B;display:inline-block;"></span>
+      Every Saturday · 8PM EST · WhatNot
     </div>
-    <div class="gw-title">30 × 2026 American<br>Silver Eagles</div>
-    <div class="gw-sub">Given away live every Saturday at 8PM EST on WhatNot. You must be present in the livestream to win — click the giveaway button when it goes live. No purchase necessary.</div>
-    <div class="gw-deadline-countdown" id="gwDeadline">⏳ Next giveaway in —</div>
+    <div class="gw-title">30 × 2026 American Silver Eagles</div>
+    <div class="gw-sub">Must be present in the livestream to win. Sign up for show alerts so you never miss a drawing.</div>
+    <div class="gw-timer" id="gwDeadline">⏳ Next giveaway in —</div>
 
     <div id="gwForm">
       <input id="gwName" type="text" placeholder="First name" class="gw-input" />
@@ -168,14 +167,14 @@
       <input id="gwEmail" type="email" placeholder="your@email.com" class="gw-input" />
       <input id="gwCell" type="tel" placeholder="+1 (555) 000-0000" class="gw-input" style="display:none;" />
       <button id="gwSubmit" class="gw-submit" onclick="gwSubmit()">Get Show Alerts →</button>
-      <div class="gw-legal">Sign up to get notified before every show. You must be present in the WhatNot livestream to enter the giveaway. No spam, no data selling.</div>
+      <div class="gw-legal">No spam. No data selling. Must be present in livestream to win.</div>
     </div>
 
     <div class="gw-success" id="gwSuccess">
       <div class="gw-success-title">🪙 You're in!</div>
-      <div class="gw-success-sub">We'll alert you before every Saturday show. Join the livestream at 8PM EST on WhatNot and click the giveaway button when it drops — 30 Silver Eagles up for grabs every week.</div>
+      <div class="gw-success-sub">We'll alert you before every Saturday show. Join live at 8PM EST on WhatNot and click the giveaway button — 30 Silver Eagles up for grabs.</div>
       <div class="share-prompt">
-        <div class="share-prompt-label"><strong>Know a stacker?</strong> Share silverdegen.com on X.</div>
+        <p><strong>Know a stacker?</strong> Share silverdegen.com on X.</p>
         <a class="share-btn" href="https://twitter.com/intent/tweet?text=%40SilverDegen%20gives%20away%2030%20%C3%97%202026%20American%20Silver%20Eagles%20live%20every%20Saturday%20at%208PM%20EST%20on%20WhatNot%20%F0%9F%AA%99%20Must%20be%20present%20to%20win%20%E2%80%94%20silverdegen.com" target="_blank">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           Spread the word on X
@@ -201,132 +200,58 @@
     <div class="card-header">
       <div class="card-icon" style="background:rgba(255,100,50,0.15);">🔴</div>
       <div><div class="card-title">Watch Live on WhatNot</div><div class="card-sub">Every Saturday · 8PM EST</div></div>
-      <div style="margin-left:auto;color:rgba(255,255,255,0.2);font-size:14px;">→</div>
+      <div style="margin-left:auto;color:rgba(255,255,255,0.2);">→</div>
     </div>
     <div class="feature-grid">
       <div class="feature-block" style="background:rgba(255,100,50,0.1);border:1px solid rgba(255,100,50,0.2);">
-        <div class="feature-block-icon">🎁</div>
-        <div class="feature-block-text">30 Silver Eagles given away live every Saturday</div>
+        <div class="feature-icon">🎁</div>
+        <div class="feature-text">30 Silver Eagles given away live every Saturday</div>
       </div>
       <div class="feature-block" style="background:rgba(255,100,50,0.1);border:1px solid rgba(255,100,50,0.2);">
-        <div class="feature-block-icon">🔴</div>
-        <div class="feature-block-text">Must be present in the livestream to win</div>
+        <div class="feature-icon">🔴</div>
+        <div class="feature-text">Must be present in livestream to win</div>
       </div>
     </div>
   </a>
 
-  <!-- SUMMIT CARD -->
-  <a class="summit-card" href="https://summitmetals.com/?ref=SilverDegen&utm_source=other&utm_medium=influencer" target="_blank">
-    <div class="card-header">
-      <div class="card-icon" style="background:rgba(184,200,212,0.15);">🪙</div>
-      <div><div class="card-title">My Preferred Bullion Dealer</div><div class="card-sub">Beats SD Bullion, JM Bullion & APMEX — every time</div></div>
-      <div style="margin-left:auto;color:rgba(255,255,255,0.2);font-size:14px;">→</div>
+  <!-- RTD CARD -->
+  <a class="rtd-card" href="rtd.html">
+    <img class="rtd-img" src="rtd-front.jpg" alt="Silver Retard Card" />
+    <div class="rtd-info">
+      <div class="rtd-badge">
+        <span style="width:4px;height:4px;border-radius:50%;background:#C0392B;display:inline-block;"></span>
+        Limited Stock
+      </div>
+      <div class="rtd-name">The Official Silver Retard Card</div>
+      <div class="rtd-sub">1 gram .999 fine silver · Free US shipping</div>
     </div>
-    <div class="feature-grid">
-      <div class="feature-block" style="background:rgba(184,200,212,0.08);border:1px solid rgba(184,200,212,0.18);">
-        <div class="feature-block-icon">🆕</div>
-        <div class="feature-block-text">New customers — 3 oz at spot price</div>
-      </div>
-      <div class="feature-block" style="background:rgba(184,200,212,0.08);border:1px solid rgba(184,200,212,0.18);">
-        <div class="feature-block-icon">📦</div>
-        <div class="feature-block-text">Free FedEx 2-day · code: DegenSilverShipping</div>
-      </div>
+    <div class="rtd-price">
+      <div class="rtd-price-num">$39.99</div>
+      <div class="rtd-price-sub">Shop →</div>
     </div>
   </a>
-
-  <!-- RTD CARD PRODUCT -->
-  <a href="rtd.html" style="display:block;width:100%;text-decoration:none;margin-bottom:24px;animation:fadeUp 0.6s ease 0.44s both;">
-    <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(184,200,212,0.25);border-radius:16px;padding:20px;display:flex;gap:16px;align-items:center;transition:background 0.2s,transform 0.15s;" onmouseover="this.style.background='rgba(184,200,212,0.08)';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.transform='translateY(0)'">
-      <img src="rtd-front.jpg" alt="Silver Retard Card" style="width:80px;height:56px;object-fit:cover;border-radius:8px;border:1px solid rgba(255,255,255,0.1);flex-shrink:0;" />
-      <div style="flex:1;">
-        <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(192,57,43,0.15);border:1px solid rgba(192,57,43,0.3);color:#ff8c7a;font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:100px;margin-bottom:6px;">
-          <span style="width:5px;height:5px;border-radius:50%;background:#C0392B;display:inline-block;"></span>
-          Limited Stock
-        </div>
-        <div style="font-family:'Teko',sans-serif;font-size:20px;font-weight:700;letter-spacing:0.03em;color:#fff;line-height:1;margin-bottom:3px;">The Official Silver Retard Card</div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.4);">1 gram .999 fine silver · Wallet size · Free US shipping</div>
-      </div>
-      <div style="text-align:right;flex-shrink:0;">
-        <div style="font-family:'Teko',sans-serif;font-size:24px;font-weight:700;color:#DCE8F0;line-height:1;">$39.99</div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px;">Shop now →</div>
-      </div>
-    </div>
-  </a>
-
-  <!-- VIDEO -->
-  <div class="video-section">
-    <div class="section-divider">
-      <div class="divider-line"></div>
-      <div class="divider-label">Featured Interview</div>
-      <div class="divider-line"></div>
-    </div>
-    <div class="video-card">
-      <div class="video-header">
-        <div class="video-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#FF4444"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        </div>
-        <div>
-          <div class="video-title">$500 Silver by 2032 — The Full Thesis</div>
-          <div class="video-channel">Summit Metals · Full interview</div>
-        </div>
-      </div>
-      <div class="video-embed">
-        <iframe src="https://www.youtube.com/embed/cqmmocjeufk?start=196" title="Silver Degen Interview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      </div>
-    </div>
-  </div>
-
-  <!-- QUOTE CARD -->
-  <div class="x-section">
-    <div class="section-divider">
-      <div class="divider-line"></div>
-      <div class="divider-label">The Thesis</div>
-      <div class="divider-line"></div>
-    </div>
-    <a href="https://x.com/SilverDegen" target="_blank" style="display:block;text-decoration:none;">
-      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:22px;transition:border-color 0.2s;" onmouseover="this.style.borderColor='rgba(184,200,212,0.3)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.08)'">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-          <div style="width:36px;height:36px;border-radius:50%;overflow:hidden;border:1px solid rgba(184,200,212,0.25);flex-shrink:0;">
-            <img src="logo.png" alt="Silver Degen" style="width:100%;height:100%;object-fit:cover;" />
-          </div>
-          <div>
-            <div style="font-size:13px;font-weight:600;color:#fff;">SilverDegen</div>
-            <div style="font-size:11px;color:rgba(255,255,255,0.35);">@SilverDegen</div>
-          </div>
-          <div style="margin-left:auto;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="rgba(255,255,255,0.3)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          </div>
-        </div>
-        <div style="font-size:14px;color:rgba(255,255,255,0.85);line-height:1.65;margin-bottom:14px;">"The volatility in silver isn't random — it's intentional. Governments don't want you accumulating it. The more volatile it gets, the more desperate they are to accumulate as much as they can before you do.<br><br>I think $500 silver by 2032 is conservative."</div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.25);">Follow @SilverDegen on X →</div>
-      </div>
-    </a>
-  </div>
 
   <div class="footer">© 2026 SilverDegen.com</div>
 </div>
 
 <script>
-  /* ── GIVEAWAY DEADLINE COUNTDOWN ── */
-  function getNextSaturday8PM() {
+  /* GIVEAWAY DEADLINE */
+  function getNextSat8PM() {
     const now = new Date();
-    const target = new Date(now);
-    const day = now.toLocaleDateString('en-US', {weekday:'short', timeZone:'America/New_York'});
-    const hour = parseInt(now.toLocaleTimeString('en-US', {hour:'numeric', hour12:false, timeZone:'America/New_York'}));
+    const nyDay = now.toLocaleDateString('en-US',{weekday:'short',timeZone:'America/New_York'}).slice(0,3);
+    const nyHour = parseInt(now.toLocaleTimeString('en-US',{hour:'numeric',hour12:false,timeZone:'America/New_York'}));
     const daysMap = {Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
-    const currentDay = daysMap[day.slice(0,3)] ?? 0;
-    let daysUntilSat = (6 - currentDay + 7) % 7;
-    if (daysUntilSat === 0 && hour >= 22) daysUntilSat = 7;
-    if (daysUntilSat === 0 && hour < 20) daysUntilSat = 0;
-    const sat = new Date(now);
-    sat.setDate(now.getDate() + daysUntilSat);
-    const satStr = sat.toLocaleDateString('en-CA') + 'T20:00:00';
-    return new Date(new Date(satStr).toLocaleString('en-US', {timeZone:'America/New_York'}) + ' EDT').getTime() ||
-           new Date(satStr.replace('T', ' ') + ' EDT').getTime();
+    const day = daysMap[nyDay] ?? 0;
+    let daysUntil = (6 - day + 7) % 7;
+    if (daysUntil === 0 && nyHour >= 22) daysUntil = 7;
+    const target = new Date(now);
+    target.setDate(now.getDate() + daysUntil);
+    const dateStr = target.toLocaleDateString('en-CA') + 'T20:00:00-04:00';
+    return new Date(dateStr).getTime();
   }
   function updateGwDeadline() {
-    const diff = Math.max(0, (getNextSaturday8PM() - Date.now()) / 1000);
-    if (diff === 0) { document.getElementById('gwDeadline').textContent = '🔴 Drawing happening now — tune in live!'; return; }
+    const diff = Math.max(0, (getNextSat8PM() - Date.now()) / 1000);
+    if (diff < 7200) { document.getElementById('gwDeadline').textContent = '🔴 Drawing happening now — tune in live!'; return; }
     const d = Math.floor(diff / 86400);
     const h = Math.floor((diff % 86400) / 3600);
     const m = Math.floor((diff % 3600) / 60);
@@ -335,7 +260,7 @@
   updateGwDeadline();
   setInterval(updateGwDeadline, 60000);
 
-  /* ── GIVEAWAY FORM ── */
+  /* GIVEAWAY FORM */
   let gwCurrentMode = 'email';
   function gwMode(m) {
     gwCurrentMode = m;
@@ -343,78 +268,63 @@
     document.getElementById('gwCell').style.display  = m === 'cell'  ? 'block' : 'none';
     const eBtn = document.getElementById('gwBtnEmail');
     const cBtn = document.getElementById('gwBtnCell');
-    eBtn.style.background    = m === 'email' ? 'rgba(184,200,212,0.2)' : 'transparent';
-    eBtn.style.borderColor   = m === 'email' ? 'rgba(184,200,212,0.4)' : 'rgba(255,255,255,0.1)';
-    eBtn.style.color         = m === 'email' ? '#DCE8F0' : 'rgba(255,255,255,0.4)';
-    cBtn.style.background    = m === 'cell'  ? 'rgba(184,200,212,0.2)' : 'transparent';
-    cBtn.style.borderColor   = m === 'cell'  ? 'rgba(184,200,212,0.4)' : 'rgba(255,255,255,0.1)';
-    cBtn.style.color         = m === 'cell'  ? '#DCE8F0' : 'rgba(255,255,255,0.4)';
+    eBtn.style.background  = m==='email'?'rgba(184,200,212,0.2)':'transparent';
+    eBtn.style.borderColor = m==='email'?'rgba(184,200,212,0.4)':'rgba(255,255,255,0.1)';
+    eBtn.style.color       = m==='email'?'#DCE8F0':'rgba(255,255,255,0.4)';
+    cBtn.style.background  = m==='cell'?'rgba(184,200,212,0.2)':'transparent';
+    cBtn.style.borderColor = m==='cell'?'rgba(184,200,212,0.4)':'rgba(255,255,255,0.1)';
+    cBtn.style.color       = m==='cell'?'#DCE8F0':'rgba(255,255,255,0.4)';
   }
-
   async function gwSubmit() {
     const name  = document.getElementById('gwName').value.trim();
     const email = document.getElementById('gwEmail').value.trim();
     const cell  = document.getElementById('gwCell').value.trim();
     if (!name)  { alert('Please enter your first name.'); return; }
-    if (gwCurrentMode === 'email' && !email) { alert('Please enter your email address.'); return; }
-    if (gwCurrentMode === 'cell'  && !cell)  { alert('Please enter your cell number.'); return; }
+    if (gwCurrentMode==='email' && !email) { alert('Please enter your email address.'); return; }
+    if (gwCurrentMode==='cell'  && !cell)  { alert('Please enter your cell number.'); return; }
     const btn = document.getElementById('gwSubmit');
-    btn.textContent = 'Entering...'; btn.disabled = true;
+    btn.textContent = 'Submitting...'; btn.disabled = true;
     try {
       const res = await fetch('https://formspree.io/f/mgopkgkp', {
         method: 'POST',
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: 'GIVEAWAY — 30x 2026 ASE', name,
-          email: gwCurrentMode === 'email' ? email : 'cell-only@silverdegen.com',
-          cell: gwCurrentMode === 'cell' ? cell : '',
-          mode: gwCurrentMode
-        })
+        body: JSON.stringify({ type:'GIVEAWAY — 30x 2026 ASE', name, email: gwCurrentMode==='email'?email:'cell-only@silverdegen.com', cell: gwCurrentMode==='cell'?cell:'', mode: gwCurrentMode })
       });
-      if (res.ok) {
-        document.getElementById('gwForm').style.display = 'none';
-        document.getElementById('gwSuccess').style.display = 'block';
-      } else { throw new Error(); }
-    } catch {
-      alert('Something went wrong. Please try again.');
-      btn.textContent = 'Enter Free Giveaway →'; btn.disabled = false;
-    }
+      if (res.ok) { document.getElementById('gwForm').style.display='none'; document.getElementById('gwSuccess').style.display='block'; }
+      else { throw new Error(); }
+    } catch { alert('Something went wrong. Please try again.'); btn.textContent='Get Show Alerts →'; btn.disabled=false; }
   }
 
-  /* ── SHOW COUNTDOWN ── */
+  /* SHOW COUNTDOWN */
   function getNextShow() {
     const now = new Date();
-    const nyDay = now.toLocaleDateString('en-US', {weekday:'short', timeZone:'America/New_York'}).slice(0,3);
-    const nyHour = parseInt(now.toLocaleTimeString('en-US', {hour:'numeric', hour12:false, timeZone:'America/New_York'}));
-    const nyMin = parseInt(now.toLocaleTimeString('en-US', {minute:'numeric', timeZone:'America/New_York'}));
+    const nyDay = now.toLocaleDateString('en-US',{weekday:'short',timeZone:'America/New_York'}).slice(0,3);
+    const nyHour = parseInt(now.toLocaleTimeString('en-US',{hour:'numeric',hour12:false,timeZone:'America/New_York'}));
     const daysMap = {Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
     const day = daysMap[nyDay] ?? 0;
-    const showHour = 20;
-    if (day === 6 && nyHour >= showHour && nyHour < showHour + 2) return { live: true };
+    if (day===6 && nyHour>=20 && nyHour<22) return { live: true };
     let daysUntil = (6 - day + 7) % 7;
-    if (daysUntil === 0 && (nyHour > showHour + 1)) daysUntil = 7;
+    if (daysUntil===0 && nyHour>=22) daysUntil = 7;
     const target = new Date(now);
     target.setDate(now.getDate() + daysUntil);
-    const dateStr = target.toLocaleDateString('en-CA') + 'T20:00:00';
-    const targetTime = new Date(dateStr + '-04:00').getTime();
-    return { live: false, targetUTC: targetTime, name: 'Saturday' };
+    const dateStr = target.toLocaleDateString('en-CA') + 'T20:00:00-04:00';
+    return { live: false, targetUTC: new Date(dateStr).getTime() };
   }
-
-  function pad(n) { return String(Math.floor(n)).padStart(2, '0'); }
+  function pad(n) { return String(Math.floor(n)).padStart(2,'0'); }
   function tick() {
     const show = getNextShow();
     if (show.live) {
-      document.getElementById('countdownGrid').style.display = 'none';
-      document.getElementById('liveNow').style.display = 'block';
-      document.getElementById('nextShowDay').textContent = 'LIVE NOW';
+      document.getElementById('countdownGrid').style.display='none';
+      document.getElementById('liveNow').style.display='block';
+      document.getElementById('nextShowDay').textContent='LIVE NOW';
       return;
     }
-    document.getElementById('nextShowDay').textContent = show.name;
-    const diff = Math.max(0, (show.targetUTC - Date.now()) / 1000);
-    document.getElementById('cd-days').textContent  = pad(diff / 86400);
-    document.getElementById('cd-hours').textContent = pad((diff % 86400) / 3600);
-    document.getElementById('cd-mins').textContent  = pad((diff % 3600) / 60);
-    document.getElementById('cd-secs').textContent  = pad(diff % 60);
+    document.getElementById('nextShowDay').textContent='Saturday';
+    const diff = Math.max(0,(show.targetUTC - Date.now())/1000);
+    document.getElementById('cd-days').textContent  = pad(diff/86400);
+    document.getElementById('cd-hours').textContent = pad((diff%86400)/3600);
+    document.getElementById('cd-mins').textContent  = pad((diff%3600)/60);
+    document.getElementById('cd-secs').textContent  = pad(diff%60);
   }
   tick();
   setInterval(tick, 1000);
