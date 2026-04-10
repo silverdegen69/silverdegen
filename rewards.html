@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SilverDegen Rewards | Members Only</title>
+  <meta name="description" content="The SilverDegen Rewards Program. Register to be considered for exclusive rewards from Silver Degen — a token of appreciation for the degens who ride with us every Saturday." />
+  <meta property="og:title" content="SilverDegen Rewards | Members Only" />
+  <meta property="og:description" content="Register for the SilverDegen Rewards Program. Exclusive appreciation for the degens who show up every Saturday." />
+  <meta property="og:url" content="https://silverdegen.com/rewards" />
+  <meta property="og:image" content="https://silverdegen.com/logo.png" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@SilverDegen" />
+  <meta name="twitter:title" content="SilverDegen Rewards | Members Only" />
+  <meta name="twitter:image" content="https://silverdegen.com/logo.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: #0C0E12;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .bg {
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 40%, rgba(184,200,212,0.13) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(138,158,174,0.07) 0%, transparent 60%);
+    }
+
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0; opacity: 0.03;
+      background-image:
+        linear-gradient(rgba(184,200,212,1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(184,200,212,1) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* Subtle gold shimmer overlay — rewards feel premium */
+    .bg-gold {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background: radial-gradient(ellipse 50% 40% at 50% 80%, rgba(212,180,100,0.04) 0%, transparent 70%);
+    }
+
+    .card {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 48px 24px 40px;
+      width: 100%; max-width: 460px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* LOGO */
+    .logo {
+      width: 200px; height: 200px; object-fit: contain;
+      filter: drop-shadow(0 0 32px rgba(184,200,212,0.3));
+      margin-bottom: 16px; max-width: 60vw;
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+
+    /* BACK LINK */
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: rgba(255,255,255,0.3); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      text-decoration: none; margin-bottom: 20px;
+      transition: color 0.2s;
+      animation: fadeUp 0.6s ease 0.05s both;
+    }
+    .back-link:hover { color: rgba(255,255,255,0.6); }
+
+    /* REWARDS BADGE */
+    .rewards-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(212,180,100,0.12);
+      border: 1px solid rgba(212,180,100,0.3);
+      color: #E8C97A;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; padding: 6px 14px;
+      border-radius: 100px; margin-bottom: 16px;
+      animation: fadeUp 0.6s ease 0.12s both;
+    }
+    .rewards-badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #E8C97A;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity:1; transform:scale(1); }
+      50%      { opacity:0.4; transform:scale(0.6); }
+    }
+
+    /* TITLE */
+    .site-title {
+      font-family: 'Teko', sans-serif;
+      font-size: 80px; font-weight: 700;
+      letter-spacing: 0.03em; line-height: 1;
+      text-align: center; white-space: nowrap;
+      background: linear-gradient(180deg,
+        #FFFFFF 0%, #E8E8E8 15%, #A0A8AF 30%,
+        #4A5560 48%, #8A9BAA 62%, #D0DCE4 78%, #FFFFFF 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      padding-bottom: 4px; margin-bottom: 4px;
+      animation: fadeUp 0.6s ease 0.15s both;
+    }
+    .rewards-subtitle {
+      font-family: 'Teko', sans-serif;
+      font-size: 32px; font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #E8C97A 0%, #C8A84A 50%, #E8C97A 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 28px;
+      animation: fadeUp 0.6s ease 0.18s both;
+    }
+
+    /* INTRO CARD */
+    .intro-card {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(212,180,100,0.08) 0%, rgba(184,200,212,0.04) 100%);
+      border: 1px solid rgba(212,180,100,0.2);
+      border-radius: 20px; padding: 24px;
+      margin-bottom: 16px;
+      animation: fadeUp 0.6s ease 0.22s both;
+    }
+    .intro-eyebrow {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #E8C97A;
+      margin-bottom: 10px;
+    }
+    .intro-text {
+      font-size: 14px; line-height: 1.75;
+      color: rgba(255,255,255,0.65);
+    }
+    .intro-text strong { color: #DCE8F0; font-weight: 600; }
+
+    /* WHAT YOU GET */
+    .perks-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 8px; margin-top: 16px;
+    }
+    .perk-block {
+      background: rgba(212,180,100,0.07);
+      border: 1px solid rgba(212,180,100,0.15);
+      border-radius: 12px; padding: 14px;
+    }
+    .perk-icon { font-size: 18px; margin-bottom: 6px; }
+    .perk-text { font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.75); line-height: 1.4; }
+
+    /* FORM CARD */
+    .form-card {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(184,200,212,0.08) 0%, rgba(184,200,212,0.02) 100%);
+      border: 1px solid rgba(184,200,212,0.25);
+      border-radius: 20px; padding: 24px;
+      margin-bottom: 16px;
+      animation: fadeUp 0.6s ease 0.28s both;
+    }
+    .form-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.35);
+      margin-bottom: 14px;
+    }
+
+    .rd-input {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; padding: 13px 16px;
+      color: #fff; font-size: 14px;
+      font-family: 'DM Sans', inherit;
+      outline: none; margin-bottom: 10px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .rd-input:focus {
+      border-color: rgba(212,180,100,0.4);
+      background: rgba(255,255,255,0.07);
+    }
+    .rd-input::placeholder { color: rgba(255,255,255,0.25); }
+
+    .rd-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #E8C97A 0%, #C8A84A 50%, #E8C97A 100%);
+      border: none; border-radius: 10px; padding: 15px;
+      font-family: 'Teko', sans-serif;
+      font-size: 26px; font-weight: 700; letter-spacing: 0.06em;
+      color: #0C0E12; cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      margin-top: 4px;
+    }
+    .rd-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+    .rd-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .rd-legal {
+      font-size: 10px; color: rgba(255,255,255,0.18);
+      text-align: center; margin-top: 10px; line-height: 1.6;
+    }
+
+    /* SUCCESS STATE */
+    .rd-success {
+      display: none; text-align: center; padding: 8px 0;
+    }
+    .rd-success-icon {
+      font-size: 48px; margin-bottom: 12px;
+      animation: bounceIn 0.5s ease both;
+    }
+    @keyframes bounceIn {
+      0%   { transform: scale(0.5); opacity: 0; }
+      70%  { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .rd-success-title {
+      font-family: 'Teko', sans-serif;
+      font-size: 38px; font-weight: 700;
+      background: linear-gradient(180deg, #E8C97A 0%, #C8A84A 50%, #E8C97A 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+    .rd-success-sub {
+      font-size: 13px; color: rgba(255,255,255,0.45);
+      line-height: 1.7; margin-bottom: 20px;
+    }
+    .rd-success-sub strong { color: #DCE8F0; }
+
+    /* SHARE BLOCK */
+    .share-block {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; padding: 14px 16px;
+    }
+    .share-block p {
+      font-size: 11px; color: rgba(255,255,255,0.4);
+      margin-bottom: 10px;
+    }
+    .share-block p strong { color: #DCE8F0; }
+    .share-btn {
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; width: 100%;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 8px; padding: 11px;
+      color: #fff; font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .share-btn:hover { background: rgba(255,255,255,0.13); }
+
+    /* MEMBER COUNT */
+    .member-strip {
+      width: 100%;
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px;
+      background: rgba(184,200,212,0.04);
+      border: 1px solid rgba(184,200,212,0.1);
+      border-radius: 12px; padding: 12px 16px;
+      margin-bottom: 28px;
+      animation: fadeUp 0.6s ease 0.32s both;
+    }
+    .member-avatars {
+      display: flex;
+    }
+    .member-avatar {
+      width: 24px; height: 24px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(184,200,212,0.3), rgba(184,200,212,0.1));
+      border: 1px solid rgba(184,200,212,0.2);
+      margin-left: -6px; display: flex; align-items: center;
+      justify-content: center; font-size: 10px;
+    }
+    .member-avatar:first-child { margin-left: 0; }
+    .member-text {
+      font-size: 11px; color: rgba(255,255,255,0.35); font-weight: 500;
+    }
+    .member-text strong { color: rgba(255,255,255,0.6); }
+
+    .footer {
+      font-size: 11px; color: rgba(255,255,255,0.15);
+      animation: fadeUp 0.6s ease 0.36s both;
+    }
+    .footer a {
+      color: rgba(255,255,255,0.25); text-decoration: none;
+    }
+    .footer a:hover { color: rgba(255,255,255,0.45); }
+
+    @media (max-width: 400px) {
+      .site-title { font-size: 64px; }
+      .rewards-subtitle { font-size: 26px; }
+      .logo { width: 160px; height: 160px; }
+    }
+  </style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="bg-grid"></div>
+<div class="bg-gold"></div>
+
+<div class="card">
+
+  <a class="back-link" href="/">← silverdegen.com</a>
+
+  <img class="logo" src="logo.png" alt="SilverDegen" />
+
+  <div class="rewards-badge">
+    <span class="rewards-badge-dot"></span>
+    Members Only Program
+  </div>
+
+  <div class="site-title">SilverDegen</div>
+  <div class="rewards-subtitle">Rewards</div>
+
+  <!-- INTRO -->
+  <div class="intro-card">
+    <div class="intro-eyebrow">🪙 What is this?</div>
+    <div class="intro-text">
+      The <strong>SilverDegen Rewards Program</strong> is a token of appreciation — not a points system, not a corporate loyalty scheme.<br><br>
+      Silver Degen occasionally rewards registered members with <strong>exclusive coin rebates, surprise metals, and early access</strong> as a genuine thank-you for riding with the community every Saturday.<br><br>
+      There are no guaranteed timelines. No fine print. Just <strong>degenerosity</strong> — when it happens, it happens to members first.
+    </div>
+
+    <div class="perks-grid">
+      <div class="perk-block">
+        <div class="perk-icon">🎯</div>
+        <div class="perk-text">Surprise coin rebates on qualifying purchases</div>
+      </div>
+      <div class="perk-block">
+        <div class="perk-icon">⚡</div>
+        <div class="perk-text">Early access to mystery pack drops</div>
+      </div>
+      <div class="perk-block">
+        <div class="perk-icon">🤝</div>
+        <div class="perk-text">Members-only community recognition</div>
+      </div>
+      <div class="perk-block">
+        <div class="perk-icon">🔔</div>
+        <div class="perk-text">First to know about exclusive show inventory</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- REGISTRATION FORM -->
+  <div class="form-card">
+    <div class="form-label">Register Your Membership</div>
+
+    <div id="rdForm">
+      <input id="rdName" type="text" placeholder="First name" class="rd-input" autocomplete="given-name" />
+      <input id="rdEmail" type="email" placeholder="Email address" class="rd-input" autocomplete="email" />
+      <input id="rdWhatnot" type="text" placeholder="WhatNot username" class="rd-input" autocomplete="off" />
+      <div style="position:relative;">
+        <span style="position:absolute;left:16px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.25);font-size:14px;pointer-events:none;line-height:1;">@</span>
+        <input id="rdX" type="text" placeholder="X username (optional)" class="rd-input" autocomplete="off" style="padding-left:28px;" />
+      </div>
+
+      <button id="rdSubmit" class="rd-submit" onclick="rdSubmit()">
+        Register As A Member →
+      </button>
+
+      <div class="rd-legal">
+        Membership is free. No purchase required to register.<br>
+        Rewards are issued at Silver Degen's sole discretion as appreciation — not a guarantee.<br>
+        Your info is never sold. Ever.
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div class="rd-success" id="rdSuccess">
+      <div class="rd-success-icon">🪙</div>
+      <div class="rd-success-title">You're a Member.</div>
+      <div class="rd-success-sub">
+        Welcome to the <strong>SilverDegen Rewards</strong> program.<br>
+        When degenerosity strikes — you'll be the first to know.<br>
+        See you Saturday at 8PM EST on WhatNot.
+      </div>
+      <div class="share-block">
+        <p><strong>Know a degen?</strong> Tell them about the rewards program.</p>
+        <a class="share-btn"
+           href="https://twitter.com/intent/tweet?text=Just+registered+for+%40SilverDegen+Rewards+%F0%9F%AA%99+%E2%80%94+exclusive+appreciation+for+the+degens+who+show+up+every+Saturday.+silverdegen.com%2Frewards"
+           target="_blank">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="white">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+          Share on X
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEMBER STRIP -->
+  <div class="member-strip">
+    <div class="member-avatars">
+      <div class="member-avatar">🤠</div>
+      <div class="member-avatar">🪙</div>
+      <div class="member-avatar">🐂</div>
+      <div class="member-avatar">⚡</div>
+    </div>
+    <div class="member-text">
+      Join the <strong>SilverDegen inner circle</strong> — Saturday degens only
+    </div>
+  </div>
+
+  <div class="footer">
+    © 2026 SilverDegen.com &nbsp;·&nbsp;
+    <a href="/">Home</a> &nbsp;·&nbsp;
+    <a href="https://x.com/SilverDegen" target="_blank">X</a> &nbsp;·&nbsp;
+    <a href="https://www.whatnot.com/user/silverdegen" target="_blank">WhatNot</a>
+  </div>
+
+</div>
+
+<script>
+  async function rdSubmit() {
+    const name    = document.getElementById('rdName').value.trim();
+    const email   = document.getElementById('rdEmail').value.trim();
+    const whatnot = document.getElementById('rdWhatnot').value.trim();
+    const xuser   = document.getElementById('rdX').value.trim().replace(/^@/, '');
+
+    if (!name)    { alert('Please enter your first name.');       return; }
+    if (!email)   { alert('Please enter your email address.');    return; }
+    if (!whatnot) { alert('Please enter your WhatNot username.'); return; }
+
+    const btn = document.getElementById('rdSubmit');
+    btn.textContent = 'Registering...';
+    btn.disabled = true;
+
+    // ── 1. Klaviyo — add to Rewards list (separate from giveaway list) ──
+    const klaviyoPayload = {
+      data: {
+        type: 'subscription',
+        attributes: {
+          profile: {
+            data: {
+              type: 'profile',
+              attributes: {
+                email: email,
+                first_name: name,
+                properties: {
+                  whatnot_username: whatnot,
+                  x_username: xuser || null,
+                  rewards_member: true,
+                  source: 'silverdegen.com/rewards',
+                  registered_at: new Date().toISOString()
+                }
+              }
+            }
+          }
+        },
+        relationships: {
+          list: {
+            data: { type: 'list', id: 'Vc5MEh' }
+          }
+        }
+      }
+    };
+
+    // ── 2. Formspree — backup capture + email notification to Miles ──
+    const formspreePayload = {
+      type: 'REWARDS MEMBER REGISTRATION',
+      name,
+      email,
+      whatnot_username: whatnot,
+      x_username: xuser || null,
+      rewards_member: true,
+      source: 'silverdegen.com/rewards',
+      registered_at: new Date().toISOString()
+    };
+
+    const SUPABASE_URL = 'https://ccgehcbqdrdjvuaflhcw.supabase.co';
+    const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjZ2VoY2JxZHJkanZ1YWZsaGN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4MzU2NTYsImV4cCI6MjA5MTQxMTY1Nn0.0GGaOzuUDxLASi_Bwo0nDB5L1Mp4e6uh7MClq04cnbI';
+
+    try {
+      // Run all three in parallel
+      const [supaRes, klaviyoRes, formspreeRes] = await Promise.all([
+
+        // ── Supabase insert ──
+        fetch(`${SUPABASE_URL}/rest/v1/rewards_members`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON,
+            'Authorization': `Bearer ${SUPABASE_ANON}`,
+            'Prefer': 'resolution=merge-duplicates'
+          },
+          body: JSON.stringify({
+            first_name:       name,
+            email:            email,
+            whatnot_username: whatnot,
+            x_username:       xuser || null,
+            registered_at:    new Date().toISOString()
+          })
+        }),
+
+        // ── Klaviyo ──
+        fetch('https://a.klaviyo.com/client/subscriptions/?company_id=U3vsQe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'revision': '2024-02-15' },
+          body: JSON.stringify(klaviyoPayload)
+        }),
+
+        // ── Formspree backup ──
+        fetch('https://formspree.io/f/mgopkgkp', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify(formspreePayload)
+        })
+      ]);
+
+      // Success if Supabase or at least one other channel worked
+      if (supaRes.ok || supaRes.status === 201 || klaviyoRes.status === 202 || formspreeRes.ok) {
+        // Store email in sessionStorage so shipping page can upsert the same row
+        sessionStorage.setItem('sd_email', email);
+        sessionStorage.setItem('sd_name', name);
+        // Redirect to shipping page
+        window.location.href = 'shipping.html';
+      } else {
+        throw new Error('All submissions failed');
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Something went wrong. Please try again or DM @SilverDegen on X.');
+      btn.textContent = 'Register As A Member →';
+      btn.disabled = false;
+    }
+  }
+</script>
+</body>
+</html>
