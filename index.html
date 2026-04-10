@@ -156,39 +156,22 @@
     </a>
   </div>
 
-  <!-- GIVEAWAY -->
-  <div class="giveaway-card">
+  <!-- DEGEN CLUB -->
+  <div class="giveaway-card" style="cursor:pointer;" onclick="window.location.href='rewards.html'">
     <div class="gw-badge">
       <span style="width:5px;height:5px;border-radius:50%;background:#C0392B;display:inline-block;"></span>
-      Every Saturday · 8PM EST · WhatNot
+      Members Only · Free Silver Program
     </div>
-    <div class="gw-title">30 × 2026 American Silver Eagles</div>
-    <div class="gw-sub">Must be present in the livestream to win. Sign up for show alerts so you never miss a drawing.</div>
-    <div class="gw-timer" id="gwDeadline">⏳ Next giveaway in —</div>
+    <div class="gw-title">🪙 The Degen Club</div>
+    <div class="gw-sub">30 American Silver Eagles given away every Saturday — Degen Club members are eligible. Plus surprise coin rebates, mystery pack early access, and rewards that show up when you least expect them.</div>
+    <div class="gw-timer">No purchase required. No fine print. Just degenerosity.</div>
 
-    <div id="gwForm">
-      <input id="gwName" type="text" placeholder="First name" class="gw-input" />
-      <div class="gw-toggle">
-        <button type="button" id="gwBtnEmail" class="gw-toggle-btn" onclick="gwMode('email')" style="background:rgba(184,200,212,0.2);border:1px solid rgba(184,200,212,0.4);color:#DCE8F0;">📧 Email</button>
-        <button type="button" id="gwBtnCell" class="gw-toggle-btn" onclick="gwMode('cell')" style="background:transparent;border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.4);">📱 Cell</button>
-      </div>
-      <input id="gwEmail" type="email" placeholder="your@email.com" class="gw-input" />
-      <input id="gwCell" type="tel" placeholder="+1 (555) 000-0000" class="gw-input" style="display:none;" />
-      <button id="gwSubmit" class="gw-submit" onclick="gwSubmit()">Get Show Alerts →</button>
-      <div class="gw-legal">No spam. No data selling. Must be present in livestream to win.</div>
-    </div>
-
-    <div class="gw-success" id="gwSuccess">
-      <div class="gw-success-title">🪙 You're in!</div>
-      <div class="gw-success-sub">We'll alert you before every Saturday show. Join live at 8PM EST on WhatNot and click the giveaway button — 30 Silver Eagles up for grabs.</div>
-      <div class="share-prompt">
-        <p><strong>Know a stacker?</strong> Share silverdegen.com on X.</p>
-        <a class="share-btn" href="https://twitter.com/intent/tweet?text=%40SilverDegen%20gives%20away%2030%20%C3%97%202026%20American%20Silver%20Eagles%20live%20every%20Saturday%20at%208PM%20EST%20on%20WhatNot%20%F0%9F%AA%99%20Must%20be%20present%20to%20win%20%E2%80%94%20silverdegen.com" target="_blank">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          Spread the word on X
-        </a>
-      </div>
-    </div>
+    <a href="rewards.html" style="display:block;text-decoration:none;">
+      <button class="gw-submit" style="margin-top:12px;">
+        Join The Degen Club →
+      </button>
+    </a>
+    <div class="gw-legal">Free to join. Your info is never sold. Ever.</div>
   </div>
 
   <!-- COUNTDOWN -->
@@ -213,7 +196,7 @@
     <div class="feature-grid">
       <div class="feature-block" style="background:rgba(255,100,50,0.1);border:1px solid rgba(255,100,50,0.2);">
         <div class="feature-icon">🎁</div>
-        <div class="feature-text">30 Silver Eagles given away live every Saturday</div>
+        <div class="feature-text">30 Silver Eagles given away live — Degen Club members eligible</div>
       </div>
       <div class="feature-block" style="background:rgba(255,100,50,0.1);border:1px solid rgba(255,100,50,0.2);">
         <div class="feature-icon">🔴</div>
@@ -243,66 +226,6 @@
 </div>
 
 <script>
-  /* GIVEAWAY DEADLINE */
-  function getNextSat8PM() {
-    const now = new Date();
-    const nyDay = now.toLocaleDateString('en-US',{weekday:'short',timeZone:'America/New_York'}).slice(0,3);
-    const nyHour = parseInt(now.toLocaleTimeString('en-US',{hour:'numeric',hour12:false,timeZone:'America/New_York'}));
-    const daysMap = {Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
-    const day = daysMap[nyDay] ?? 0;
-    let daysUntil = (6 - day + 7) % 7;
-    if (daysUntil === 0 && nyHour >= 22) daysUntil = 7;
-    const target = new Date(now);
-    target.setDate(now.getDate() + daysUntil);
-    const dateStr = target.toLocaleDateString('en-CA') + 'T20:00:00-04:00';
-    return new Date(dateStr).getTime();
-  }
-  function updateGwDeadline() {
-    const diff = Math.max(0, (getNextSat8PM() - Date.now()) / 1000);
-    if (diff < 7200) { document.getElementById('gwDeadline').textContent = '🔴 Drawing happening now — tune in live!'; return; }
-    const d = Math.floor(diff / 86400);
-    const h = Math.floor((diff % 86400) / 3600);
-    const m = Math.floor((diff % 3600) / 60);
-    document.getElementById('gwDeadline').textContent = `⏳ Next giveaway in ${d}d ${h}h ${m}m`;
-  }
-  updateGwDeadline();
-  setInterval(updateGwDeadline, 60000);
-
-  /* GIVEAWAY FORM */
-  let gwCurrentMode = 'email';
-  function gwMode(m) {
-    gwCurrentMode = m;
-    document.getElementById('gwEmail').style.display = m === 'email' ? 'block' : 'none';
-    document.getElementById('gwCell').style.display  = m === 'cell'  ? 'block' : 'none';
-    const eBtn = document.getElementById('gwBtnEmail');
-    const cBtn = document.getElementById('gwBtnCell');
-    eBtn.style.background  = m==='email'?'rgba(184,200,212,0.2)':'transparent';
-    eBtn.style.borderColor = m==='email'?'rgba(184,200,212,0.4)':'rgba(255,255,255,0.1)';
-    eBtn.style.color       = m==='email'?'#DCE8F0':'rgba(255,255,255,0.4)';
-    cBtn.style.background  = m==='cell'?'rgba(184,200,212,0.2)':'transparent';
-    cBtn.style.borderColor = m==='cell'?'rgba(184,200,212,0.4)':'rgba(255,255,255,0.1)';
-    cBtn.style.color       = m==='cell'?'#DCE8F0':'rgba(255,255,255,0.4)';
-  }
-  async function gwSubmit() {
-    const name  = document.getElementById('gwName').value.trim();
-    const email = document.getElementById('gwEmail').value.trim();
-    const cell  = document.getElementById('gwCell').value.trim();
-    if (!name)  { alert('Please enter your first name.'); return; }
-    if (gwCurrentMode==='email' && !email) { alert('Please enter your email address.'); return; }
-    if (gwCurrentMode==='cell'  && !cell)  { alert('Please enter your cell number.'); return; }
-    const btn = document.getElementById('gwSubmit');
-    btn.textContent = 'Submitting...'; btn.disabled = true;
-    try {
-      const res = await fetch('https://formspree.io/f/mgopkgkp', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type:'GIVEAWAY — 30x 2026 ASE', name, email: gwCurrentMode==='email'?email:'cell-only@silverdegen.com', cell: gwCurrentMode==='cell'?cell:'', mode: gwCurrentMode })
-      });
-      if (res.ok) { document.getElementById('gwForm').style.display='none'; document.getElementById('gwSuccess').style.display='block'; }
-      else { throw new Error(); }
-    } catch { alert('Something went wrong. Please try again.'); btn.textContent='Get Show Alerts →'; btn.disabled=false; }
-  }
-
   /* SHOW COUNTDOWN */
   function getNextShow() {
     const now = new Date();
