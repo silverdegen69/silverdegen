@@ -444,18 +444,58 @@
   function confirmShowMe() {
     closeModal('showme-modal');
     const gold = state.session?.goldPosition;
-    const packEl = document.getElementById('pack-' + gold);
-    if (packEl) {
-      packEl.style.border = '2px solid var(--gold)';
-      packEl.style.boxShadow = '0 0 24px rgba(232,201,122,0.4)';
-      packEl.querySelector('.pack-label').textContent = '🏅 GOLD HERE';
-      packEl.querySelector('.pack-logo').style.display = 'none';
+
+    // Fade out all non-gold packs
+    for (let i = 1; i <= 10; i++) {
+      const el = document.getElementById('pack-' + i);
+      if (!el) continue;
+      if (i === gold) {
+        // Reveal gold pack
+        el.style.border = '2px solid var(--gold)';
+        el.style.boxShadow = '0 0 32px rgba(232,201,122,0.5)';
+        el.style.transform = 'scale(1.06)';
+        el.style.transition = 'all 0.4s ease';
+        el.style.opacity = '1';
+        el.innerHTML = `
+          <div class="pack-serial">VLT-${String(gold).padStart(3,'0')}</div>
+          <img src="goldbar.jpg" alt="Gold Bar" style="width:52px;height:70px;object-fit:contain;filter:drop-shadow(0 2px 16px rgba(232,201,122,0.7));position:absolute;top:50%;left:50%;transform:translate(-50%,-62%);" />
+          <div class="pack-bottom-strip" style="background:rgba(232,201,122,0.25);border-top:1px solid rgba(232,201,122,0.4);">
+            <div class="pack-label" style="color:var(--gold);">🥇 GOLD WAS HERE</div>
+            <div class="pack-odds-tag">REVEALED</div>
+          </div>
+        `;
+      } else {
+        // Fade out other packs
+        el.style.opacity = '0.2';
+        el.style.transition = 'opacity 0.4s ease';
+      }
     }
 
+    // Show seed info as a non-blocking banner at top of vault content
+    const content = document.querySelector('.vault-content');
+    const banner = document.createElement('div');
+    banner.style.cssText = `
+      background: rgba(232,201,122,0.08);
+      border: 1px solid rgba(232,201,122,0.25);
+      border-radius: 12px; padding: 14px 18px;
+      font-size: 12px; color: var(--text);
+      font-family: 'DM Mono', monospace;
+      line-height: 1.8; margin-bottom: 16px;
+      animation: fadeUp 0.4s ease both;
+    `;
+    banner.innerHTML = `
+      <div style="color:var(--gold);font-family:'Teko',sans-serif;font-size:18px;margin-bottom:6px;letter-spacing:0.08em;">SESSION REVEALED — PROVABLY FAIR</div>
+      Server Seed: ${state.session.serverSeed}<br>
+      Client Seed: ${state.session.clientSeed}<br>
+      Gold was in Pack #${gold} — verify this result in My Sessions.
+    `;
+    content.insertBefore(banner, content.firstChild);
+
+    // After 3 seconds start new session
     setTimeout(() => {
-      alert(`Pack #${gold} contained the gold bar.\n\nServer Seed: ${state.session.serverSeed}\nClient Seed: ${state.session.clientSeed}\n\nYou can verify this result in My Sessions.`);
-      initSession(); // Start fresh
-    }, 1200);
+      initSession();
+      banner.remove();
+    }, 4000);
   }
 
   // ── VERIFIER ──
