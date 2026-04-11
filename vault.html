@@ -558,23 +558,23 @@
 
     .pack-serial {
       font-family: 'DM Mono', monospace;
-      font-size: 10px; color: var(--text-dim);
+      font-size: 10px; color: rgba(255,255,255,0.6);
       letter-spacing: 0.06em;
-    }
-    .pack-logo {
-      width: 64px; height: 64px; object-fit: contain;
-      opacity: 0.7;
+      position: absolute; top: 8px; left: 10px;
+      z-index: 2;
     }
     .pack-label {
       font-family: 'Teko', sans-serif;
-      font-size: 16px; letter-spacing: 0.08em;
-      color: var(--text-dim); text-transform: uppercase;
-      text-align: center;
+      font-size: 14px; letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.5); text-transform: uppercase;
+      position: absolute; bottom: 24px;
+      z-index: 2; text-align: center;
     }
     .pack-odds-tag {
       position: absolute; bottom: 8px; right: 10px;
       font-size: 10px; font-family: 'DM Mono', monospace;
-      color: rgba(232,201,122,0.5);
+      color: rgba(232,201,122,0.6);
+      z-index: 2;
     }
 
     /* ── REVEAL OVERLAY ── */
