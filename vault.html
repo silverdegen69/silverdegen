@@ -516,21 +516,22 @@
     .pack-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 12px;
+      gap: 16px;
     }
 
     .mystery-pack {
-      aspect-ratio: 6/4;
+      aspect-ratio: 3/4;
       background: var(--panel);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 16px;
       cursor: pointer;
       position: relative;
       overflow: hidden;
       transition: all 0.2s;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      gap: 6px;
+      gap: 10px;
+      padding: 12px;
     }
     .mystery-pack::before {
       content: '';
@@ -557,21 +558,22 @@
 
     .pack-serial {
       font-family: 'DM Mono', monospace;
-      font-size: 8px; color: var(--text-dim);
+      font-size: 10px; color: var(--text-dim);
       letter-spacing: 0.06em;
     }
     .pack-logo {
-      width: 32px; height: 32px; object-fit: contain;
+      width: 64px; height: 64px; object-fit: contain;
       opacity: 0.7;
     }
     .pack-label {
       font-family: 'Teko', sans-serif;
-      font-size: 11px; letter-spacing: 0.08em;
+      font-size: 16px; letter-spacing: 0.08em;
       color: var(--text-dim); text-transform: uppercase;
+      text-align: center;
     }
     .pack-odds-tag {
-      position: absolute; bottom: 6px; right: 6px;
-      font-size: 8px; font-family: 'DM Mono', monospace;
+      position: absolute; bottom: 8px; right: 10px;
+      font-size: 10px; font-family: 'DM Mono', monospace;
       color: rgba(232,201,122,0.5);
     }
 
