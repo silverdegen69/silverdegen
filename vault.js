@@ -12,10 +12,10 @@
     session: null,
     spinCount: 0,
     currentOdds: 10,
-    goldPosition: null,
     boxNumber: 1,
     packResults: Array(10).fill(null),
-    isRevealing: false
+    isRevealing: false,
+    goldWon: false
   };
 
   // ── SCREEN MANAGEMENT ──
@@ -158,15 +158,21 @@
     const goldPosition = (simpleHashInt(combined) % 10) + 1; // 1-10
 
     state.session = {
-      serverSeed, serverHash, clientSeed, goldPosition,
+      serverSeed, serverHash, clientSeed,
       startedAt: Date.now(),
       expiresAt: Date.now() + (24 * 60 * 60 * 1000)
     };
+    // Store gold position in closure — not accessible via state.session.goldPosition
+    let _goldPosition = goldPosition;
     state.spinCount   = 0;
     state.currentOdds = 10;
     state.packResults = Array(10).fill(null);
     state.boxNumber   = (state.boxNumber || 0) + 1;
     state.goldWon     = false;
+
+    // Clear lock banner from previous session
+    const existingBanner = document.getElementById('lock-banner');
+    if (existingBanner) existingBanner.remove();
 
     // Update UI
     document.getElementById('pf-server-hash').textContent = serverHash;
@@ -242,10 +248,15 @@
       if (label) label.textContent = 'LOCKED';
     });
 
+    // Remove any existing lock banner first to prevent stacking
+    const existingBanner = document.getElementById('lock-banner');
+    if (existingBanner) existingBanner.remove();
+
     // Show locked banner below odds bar
     const oddsBar = document.querySelector('.odds-bar');
     if (oddsBar) {
       const lockBanner = document.createElement('div');
+      lockBanner.id = 'lock-banner';
       lockBanner.style.cssText = `
         background: rgba(232,201,122,0.08);
         border: 1px solid rgba(232,201,122,0.2);
@@ -282,7 +293,7 @@
     let result;
     if (state.spinCount === 10) {
       result = 'gold_bar'; // guaranteed
-    } else if (packNum === state.session.goldPosition && !state.packResults.includes('gold_bar')) {
+    } else if (packNum === _goldPosition && !state.packResults.includes('gold_bar')) {
       result = 'gold_bar';
     } else {
       result = 'war_nickel';
@@ -443,7 +454,7 @@
     alert('Your gold bar is confirmed for shipment. You\'ll receive a tracking number within 3 business days. Congratulations! 🏆');
     // In production: trigger shipping workflow
     if (state.session) {
-      state.session.goldPosition = -1; // reset
+      _goldPosition = -1; // reset
     }
     updateOddsUI();
     renderPackGrid();
@@ -483,7 +494,7 @@
 
   function confirmShowMe() {
     closeModal('showme-modal');
-    const gold = state.session?.goldPosition;
+    const gold = _goldPosition;
     state.goldWon = true; // lock entire grid immediately
 
     // Fade out all non-gold packs
