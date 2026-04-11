@@ -166,6 +166,7 @@
     state.currentOdds = 10;
     state.packResults = Array(10).fill(null);
     state.boxNumber   = (state.boxNumber || 0) + 1;
+    state.goldWon     = false;
 
     // Update UI
     document.getElementById('pf-server-hash').textContent = serverHash;
@@ -230,10 +231,40 @@
     document.getElementById('spins-label').textContent   = spins + ' of 10 opened';
   }
 
+  // ── LOCK GRID AFTER GOLD WIN ──
+  function lockPackGrid() {
+    document.querySelectorAll('.mystery-pack:not(.opened)').forEach(pack => {
+      pack.style.opacity = '0.3';
+      pack.style.cursor = 'not-allowed';
+      pack.style.pointerEvents = 'none';
+      // Update label to show locked
+      const label = pack.querySelector('.pack-label');
+      if (label) label.textContent = 'LOCKED';
+    });
+
+    // Show locked banner below odds bar
+    const oddsBar = document.querySelector('.odds-bar');
+    if (oddsBar) {
+      const lockBanner = document.createElement('div');
+      lockBanner.style.cssText = `
+        background: rgba(232,201,122,0.08);
+        border: 1px solid rgba(232,201,122,0.2);
+        border-radius: 10px; padding: 12px 16px;
+        font-size: 13px; color: var(--gold);
+        font-family: 'Teko', sans-serif;
+        font-size: 18px; letter-spacing: 0.06em;
+        text-align: center;
+      `;
+      lockBanner.textContent = '🏆 GOLD FOUND — THIS BOX IS CLOSED. OPEN A NEW BOX TO CONTINUE.';
+      oddsBar.insertAdjacentElement('afterend', lockBanner);
+    }
+  }
+
   // ── OPEN PACK ──
   async function openPack(packNum) {
     if (state.isRevealing) return;
     if (state.packResults[packNum-1] !== null) return;
+    if (state.goldWon) return; // box is closed after gold win
 
     // Check session expiry
     if (Date.now() > state.session.expiresAt) {
@@ -277,6 +308,12 @@
       amount_charged: DIGITAL_PRICE,
       buyback_offered: result === 'gold_bar'
     });
+
+    // Lock grid if gold was won
+    if (result === 'gold_bar') {
+      state.goldWon = true;
+      lockPackGrid();
+    }
   }
 
   // ── REVEAL ANIMATION ──
