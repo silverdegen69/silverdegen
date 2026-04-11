@@ -237,6 +237,148 @@
     document.getElementById('spins-label').textContent   = spins + ' of 10 opened';
   }
 
+  // ── P&L TRACKING ──
+  async function updateCustomerPnL(result) {
+    if (!state.currentUser?.email) return;
+
+    const email = state.currentUser.email;
+    const GOLD_VALUE = 190; // retail value of gold bar
+
+    try {
+      // Fetch current customer P&L
+      const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/vault_customers?email=eq.${encodeURIComponent(email)}&select=total_packs_purchased,total_gold_wins,total_spent,total_gold_value`,
+        { headers: { 'apikey': SUPABASE_ANON, 'Authorization': `Bearer ${SUPABASE_ANON}` }}
+      );
+      const data = await res.json();
+      const customer = data?.[0] || {};
+
+      const newPacks    = (customer.total_packs_purchased || 0) + 1;
+      const newSpent    = (customer.total_spent           || 0) + DIGITAL_PRICE;
+      const newGoldWins = (customer.total_gold_wins       || 0) + (result === 'gold_bar' ? 1 : 0);
+      const newGoldVal  = (customer.total_gold_value      || 0) + (result === 'gold_bar' ? GOLD_VALUE : 0);
+      const newNetPnl   = newGoldVal - newSpent;
+      const newFraudScore = newSpent > 0 ? parseFloat(((newGoldVal - newSpent) / newSpent).toFixed(2)) : 0;
+
+      // Update customer record
+      await fetch(
+        `${SUPABASE_URL}/rest/v1/vault_customers?email=eq.${encodeURIComponent(email)}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON,
+            'Authorization': `Bearer ${SUPABASE_ANON}`,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({
+            total_packs_purchased: newPacks,
+            total_gold_wins:       newGoldWins,
+            total_spent:           newSpent,
+            total_gold_value:      newGoldVal,
+            net_pnl:               newNetPnl,
+            fraud_score:           newFraudScore,
+            ...(result === 'gold_bar' ? { last_gold_win_at: new Date().toISOString() } : {})
+          })
+        }
+      );
+
+      // Store locally for fraud check
+      state.pnl = {
+        totalSpent:    newSpent,
+        totalGoldWins: newGoldWins,
+        totalGoldVal:  newGoldVal,
+        netPnl:        newNetPnl,
+        fraudScore:    newFraudScore
+      };
+
+    } catch(e) { console.error('P&L update failed:', e); }
+  }
+
+  // ── FRAUD DETECTION ──
+  async function checkFraudSignals() {
+    if (!state.currentUser?.email) return;
+    const email = state.currentUser.email;
+    const pnl   = state.pnl || {};
+
+    const fraudScore   = pnl.fraudScore   || 0;
+    const netPnl       = pnl.netPnl       || 0;
+    const totalSpent   = pnl.totalSpent   || 0;
+    const goldWins     = pnl.totalGoldWins || 0;
+
+    // Net loser — no action regardless of wins
+    if (netPnl < 0) return;
+
+    let flagType   = null;
+    let actionTaken = 'review_required';
+
+    // Tier 3 — impossible P&L ratio
+    if (fraudScore > 2.0 && goldWins >= 2) {
+      flagType    = 'impossible_pnl_ratio';
+      actionTaken = 'auto_suspend_shipment';
+    }
+    // Tier 2 — high fraud score + multiple wins
+    else if (fraudScore > 1.0 && goldWins >= 3) {
+      flagType    = 'high_win_rate_net_positive';
+      actionTaken = 'hold_shipment_pending_review';
+    }
+    // Tier 1 — net winner with multiple gold wins
+    else if (fraudScore > 0.5 && goldWins >= 3) {
+      flagType    = 'elevated_win_rate';
+      actionTaken = 'flag_for_review';
+    }
+
+    if (!flagType) return;
+
+    // Log to Supabase fraud flags table
+    await supaInsert('vault_fraud_flags', {
+      customer_email: email,
+      flag_type:      flagType,
+      fraud_score:    fraudScore,
+      net_pnl:        netPnl,
+      total_spent:    totalSpent,
+      gold_wins:      goldWins,
+      action_taken:   actionTaken,
+      details: {
+        pack_type:    'digital',
+        box_number:   state.boxNumber,
+        spin_count:   state.spinCount
+      }
+    });
+
+    // Update customer fraud flag status
+    await fetch(
+      `${SUPABASE_URL}/rest/v1/vault_customers?email=eq.${encodeURIComponent(email)}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPABASE_ANON,
+          'Authorization': `Bearer ${SUPABASE_ANON}`,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ fraud_flag: flagType })
+      }
+    );
+
+    // Alert Miles via Formspree
+    await fetch('https://formspree.io/f/mgopkgkp', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type:        '🚨 VAULT FRAUD ALERT',
+        customer:    email,
+        flag_type:   flagType,
+        fraud_score: fraudScore,
+        net_pnl:     `$${netPnl.toFixed(2)}`,
+        total_spent: `$${totalSpent.toFixed(2)}`,
+        gold_wins:   goldWins,
+        action:      actionTaken,
+        message:     'Review customer before gold ships.'
+      })
+    });
+  }
+
   // ── LOCK GRID AFTER GOLD WIN ──
   function lockPackGrid() {
     document.querySelectorAll('.mystery-pack:not(.opened)').forEach(pack => {
@@ -316,17 +458,23 @@
 
     // Save order to Supabase
     supaInsert('vault_orders', {
-      pack_type:    'digital',
-      spin_number:  state.spinCount,
-      result:       result,
+      pack_type:      'digital',
+      spin_number:    state.spinCount,
+      result:         result,
       amount_charged: DIGITAL_PRICE,
       buyback_offered: result === 'gold_bar'
     });
+
+    // ── P&L TRACKING ──
+    // Update customer P&L on every spin
+    updateCustomerPnL(result);
 
     // Lock grid if gold was won
     if (result === 'gold_bar') {
       state.goldWon = true;
       lockPackGrid();
+      // Run fraud check after gold win
+      checkFraudSignals();
     }
   }
 
