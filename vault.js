@@ -484,18 +484,22 @@
   function confirmShowMe() {
     closeModal('showme-modal');
     const gold = state.session?.goldPosition;
+    state.goldWon = true; // lock entire grid immediately
 
     // Fade out all non-gold packs
     for (let i = 1; i <= 10; i++) {
       const el = document.getElementById('pack-' + i);
       if (!el) continue;
       if (i === gold) {
-        // Reveal gold pack
+        // Reveal gold pack — fully locked, no click
         el.style.border = '2px solid var(--gold)';
         el.style.boxShadow = '0 0 32px rgba(232,201,122,0.5)';
         el.style.transform = 'scale(1.06)';
         el.style.transition = 'all 0.4s ease';
         el.style.opacity = '1';
+        el.style.cursor = 'not-allowed';
+        el.style.pointerEvents = 'none';
+        el.onclick = null;
         el.innerHTML = `
           <div class="pack-serial">VLT-${String(gold).padStart(3,'0')}</div>
           <img src="goldbar.jpg" alt="Gold Bar" style="width:52px;height:70px;object-fit:contain;filter:drop-shadow(0 2px 16px rgba(232,201,122,0.7));position:absolute;top:50%;left:50%;transform:translate(-50%,-62%);" />
