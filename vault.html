@@ -3,24 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Degen Mystery Packs | SilverDegen</title>
+  <title>The Vault | SilverDegen</title>
   <meta name="robots" content="noindex, nofollow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;600;700&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
   <style>
     :root {
-      --black: #08090C; --dark: #0C0E12; --panel: #111318;
-      --border: rgba(184,200,212,0.12); --chrome: #DCE8F0;
-      --gold: #E8C97A; --gold-dim: #C8A84A;
-      --text: rgba(255,255,255,0.65); --text-dim: rgba(255,255,255,0.25);
+      --black:    #08090C;
+      --dark:     #0C0E12;
+      --panel:    #111318;
+      --border:   rgba(184,200,212,0.12);
+      --chrome:   #DCE8F0;
+      --gold:     #E8C97A;
+      --gold-dim: #C8A84A;
+      --red:      #C0392B;
+      --text:     rgba(255,255,255,0.65);
+      --text-dim: rgba(255,255,255,0.25);
     }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       font-family: 'DM Sans', sans-serif;
-      background: var(--black); color: #fff;
-      min-height: 100vh; -webkit-font-smoothing: antialiased;
+      background: var(--black);
+      color: #fff;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
+
+    /* ── BACKGROUND ── */
     .bg-layer {
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background:
@@ -30,243 +44,1315 @@
     .bg-grid {
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
       opacity: 0.025;
-      background-image: linear-gradient(rgba(184,200,212,1) 1px, transparent 1px), linear-gradient(90deg, rgba(184,200,212,1) 1px, transparent 1px);
+      background-image:
+        linear-gradient(rgba(184,200,212,1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(184,200,212,1) 1px, transparent 1px);
       background-size: 40px 40px;
     }
-    .wrap { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; }
-    nav {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 20px 32px; border-bottom: 1px solid var(--border);
+
+    /* ── SCREENS ── */
+    .screen {
+      display: none;
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
     }
-    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .screen.active { display: flex; flex-direction: column; }
+
+    /* ── NAV ── */
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none;
+    }
     .nav-logo img { width: 36px; height: 36px; object-fit: contain; }
     .nav-brand {
-      font-family: 'Teko', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 0.05em;
-      background: linear-gradient(180deg, #fff 0%, #A0A8AF 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .hero {
-      text-align: center; padding: 52px 24px 36px;
-    }
-    .hero-badge {
-      display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--gold);
-      background: rgba(232,201,122,0.08); border: 1px solid rgba(232,201,122,0.2);
-      border-radius: 100px; padding: 6px 16px; margin-bottom: 20px;
-    }
-    .hero-title {
-      font-family: 'Teko', sans-serif; font-size: 72px; font-weight: 700;
-      line-height: 0.9; letter-spacing: 0.02em;
-      background: linear-gradient(180deg, #fff 0%, #A0A8AF 40%, #4A5560 60%, #D0DCE4 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      margin-bottom: 12px;
-    }
-    .hero-sub {
-      font-family: 'Teko', sans-serif; font-size: 20px; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--gold); opacity: 0.8;
-    }
-    .cols-wrap {
-      display: grid; grid-template-columns: 1fr 1px 1fr;
-      gap: 0; max-width: 1100px; margin: 0 auto;
-      padding: 0 24px 60px; width: 100%;
-    }
-    .col-divider {
-      background: rgba(184,200,212,0.12);
-      margin: 0 24px;
-    }
-    .col-header {
       font-family: 'Teko', sans-serif;
-      font-size: 36px; font-weight: 700; letter-spacing: 0.06em;
-      text-transform: uppercase; color: #fff;
-      text-align: center;
-      padding: 20px 0 20px;
-      border-bottom: 1px solid rgba(184,200,212,0.12);
-      margin-bottom: 20px;
+      font-size: 22px; font-weight: 700;
+      letter-spacing: 0.05em;
+      background: linear-gradient(180deg, #fff 0%, #A0A8AF 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .col-header span {
-      display: block; font-size: 12px; font-weight: 400;
-      letter-spacing: 0.14em; color: rgba(255,255,255,0.55);
+    .nav-right {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .nav-user {
+      font-size: 12px; color: var(--text-dim);
       font-family: 'DM Mono', monospace;
-      margin-top: 4px; text-transform: uppercase;
     }
-    .col-inner { padding: 0 20px; }
-    .series-card {
-      background: var(--panel); border: 1px solid var(--border);
-      border-radius: 18px; padding: 20px;
-      margin-bottom: 14px; display: block; text-decoration: none;
-      transition: border-color 0.2s, transform 0.2s;
-      cursor: pointer;
+    .nav-btn {
+      background: rgba(184,200,212,0.08);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 8px 16px;
+      color: var(--chrome); font-size: 12px; font-weight: 600;
+      cursor: pointer; font-family: inherit;
+      transition: background 0.2s;
     }
-    .series-card:hover { border-color: rgba(232,201,122,0.4); transform: translateY(-2px); }
-    .series-badge {
+    .nav-btn:hover { background: rgba(184,200,212,0.14); }
+
+    /* ── LANDING SCREEN ── */
+    .landing-hero {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 64px 24px 48px; text-align: center;
+    }
+    .vault-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(232,201,122,0.1);
+      border: 1px solid rgba(232,201,122,0.25);
+      color: var(--gold); font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 6px 16px; border-radius: 100px;
+      margin-bottom: 24px;
+      animation: fadeUp 0.6s ease both;
+    }
+    .vault-title {
+      font-family: 'Teko', sans-serif;
+      font-size: clamp(64px, 12vw, 120px);
+      font-weight: 700; line-height: 0.9;
+      letter-spacing: 0.02em;
+      background: linear-gradient(180deg,
+        #FFFFFF 0%, #E8E8E8 15%, #A0A8AF 30%,
+        #4A5560 48%, #8A9BAA 62%, #D0DCE4 78%, #FFFFFF 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+    .vault-subtitle {
+      font-family: 'Teko', sans-serif;
+      font-size: clamp(18px, 4vw, 28px);
+      font-weight: 600; letter-spacing: 0.15em;
+      color: var(--gold); text-transform: uppercase;
+      margin-bottom: 20px;
+      animation: fadeUp 0.6s ease 0.15s both;
+    }
+    .vault-desc {
+      font-size: 14px; color: var(--text);
+      line-height: 1.75; max-width: 480px;
+      margin-bottom: 48px;
+      animation: fadeUp 0.6s ease 0.2s both;
+    }
+    .vault-desc strong { color: #fff; }
+
+    /* ── PACK SELECTION ── */
+    .pack-selection {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px; max-width: 680px;
+      width: 100%; margin: 0 auto 48px;
+      padding: 0 24px;
+      animation: fadeUp 0.6s ease 0.25s both;
+    }
+
+    .pack-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px; padding: 28px 24px;
+      cursor: pointer; transition: all 0.2s;
+      position: relative; overflow: hidden;
+      text-align: left;
+    }
+    .pack-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(232,201,122,0.08) 0%, transparent 70%);
+      opacity: 0; transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .pack-card:hover { border-color: rgba(232,201,122,0.3); transform: translateY(-2px); }
+    .pack-card:hover::before { opacity: 1; }
+    .pack-card.selected {
+      border-color: var(--gold);
+      background: rgba(232,201,122,0.06);
+    }
+    .pack-card.selected::before { opacity: 1; }
+
+    .pack-type-badge {
       font-size: 9px; font-weight: 700; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--gold);
-      display: block; margin-bottom: 10px;
+      margin-bottom: 12px; display: block;
     }
-    .series-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
-    .series-name { font-family: 'Teko', sans-serif; font-size: 26px; font-weight: 700; color: #fff; line-height: 1; }
-    .series-price { font-family: 'Teko', sans-serif; font-size: 32px; font-weight: 700; color: var(--gold); line-height: 1; white-space: nowrap; }
-    .series-desc { font-size: 12px; color: var(--text); line-height: 1.7; margin-bottom: 14px; }
-    .series-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .meta-pill {
-      font-size: 10px; font-weight: 600; letter-spacing: 0.06em;
-      color: rgba(232,201,122,0.8); background: rgba(232,201,122,0.08);
-      border: 1px solid rgba(232,201,122,0.18); border-radius: 100px; padding: 3px 10px;
+    .pack-name {
+      font-family: 'Teko', sans-serif;
+      font-size: 28px; font-weight: 700;
+      line-height: 1; margin-bottom: 8px;
+      color: #fff;
     }
-    .series-img { width: 100%; height: 120px; object-fit: contain; margin-bottom: 14px; opacity: 0.9; }
-    .series-btn {
-      display: block; width: 100%; text-align: center; text-decoration: none;
+    .pack-price {
+      font-family: 'Teko', sans-serif;
+      font-size: 42px; font-weight: 700;
       background: linear-gradient(135deg, var(--gold), var(--gold-dim));
-      border: none; border-radius: 10px; padding: 12px;
-      font-family: 'Teko', sans-serif; font-size: 20px; font-weight: 700;
-      letter-spacing: 0.05em; color: #0C0E12; cursor: pointer; transition: opacity 0.2s;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
     }
-    .series-btn:hover { opacity: 0.9; }
-    .series-coming {
-      background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.08);
-      border-radius: 18px; padding: 28px; text-align: center; margin-bottom: 14px;
+    .pack-features { list-style: none; }
+    .pack-features li {
+      font-size: 12px; color: var(--text);
+      padding: 4px 0; display: flex; gap: 8px;
     }
-    .coming-soon { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; }
-    .coming-name { font-family: 'Teko', sans-serif; font-size: 22px; color: rgba(255,255,255,0.2); }
+    .pack-features li::before { content: '—'; color: var(--gold-dim); flex-shrink: 0; }
+
+    .pack-select-btn {
+      width: 100%; margin-top: 20px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+      border: none; border-radius: 10px; padding: 13px;
+      font-family: 'Teko', sans-serif;
+      font-size: 20px; font-weight: 700; letter-spacing: 0.06em;
+      color: #0C0E12; cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .pack-select-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* odds disclosure */
     .odds-disclosure {
-      text-align: center; font-size: 11px; color: var(--text-dim);
-      padding: 20px 24px; border-top: 1px solid var(--border);
-      max-width: 1100px; margin: 0 auto; width: 100%;
+      font-size: 11px; color: var(--text-dim);
+      text-align: center; max-width: 480px;
+      margin: 0 auto; padding: 0 24px;
+      line-height: 1.6;
+      animation: fadeUp 0.6s ease 0.3s both;
     }
+
+    /* ── AUTH SCREEN ── */
+    .auth-wrap {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; flex: 1;
+      padding: 48px 24px;
+    }
+    .auth-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px; padding: 40px 32px;
+      width: 100%; max-width: 400px;
+      animation: fadeUp 0.5s ease both;
+    }
+    .auth-title {
+      font-family: 'Teko', sans-serif;
+      font-size: 36px; font-weight: 700;
+      margin-bottom: 6px; color: #fff;
+    }
+    .auth-sub {
+      font-size: 13px; color: var(--text);
+      margin-bottom: 28px; line-height: 1.6;
+    }
+    .auth-sub strong { color: var(--gold); }
+
+    .google-btn {
+      width: 100%; display: flex; align-items: center;
+      justify-content: center; gap: 12px;
+      background: #fff; border: none; border-radius: 10px;
+      padding: 13px; font-family: inherit;
+      font-size: 14px; font-weight: 600; color: #1a1a1a;
+      cursor: pointer; transition: opacity 0.2s;
+      margin-bottom: 16px;
+    }
+    .google-btn:hover { opacity: 0.92; }
+
+    .auth-divider {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 16px;
+    }
+    .auth-divider-line { flex: 1; height: 1px; background: var(--border); }
+    .auth-divider-text { font-size: 11px; color: var(--text-dim); }
+
+    .auth-input {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 10px; padding: 13px 16px;
+      color: #fff; font-size: 14px; font-family: inherit;
+      outline: none; margin-bottom: 10px;
+      transition: border-color 0.2s;
+    }
+    .auth-input:focus { border-color: rgba(232,201,122,0.4); }
+    .auth-input::placeholder { color: var(--text-dim); }
+
+    .auth-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+      border: none; border-radius: 10px; padding: 14px;
+      font-family: 'Teko', sans-serif;
+      font-size: 22px; font-weight: 700; letter-spacing: 0.05em;
+      color: #0C0E12; cursor: pointer;
+      transition: opacity 0.2s; margin-top: 4px;
+    }
+    .auth-submit:hover { opacity: 0.9; }
+
+    .auth-toggle {
+      font-size: 12px; color: var(--text-dim);
+      text-align: center; margin-top: 16px; cursor: pointer;
+    }
+    .auth-toggle span { color: var(--gold); text-decoration: underline; }
+
+    /* ── CONSENT SCREEN ── */
+    .consent-wrap {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; flex: 1; padding: 48px 24px;
+    }
+    .consent-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px; padding: 40px 32px;
+      width: 100%; max-width: 520px;
+      animation: fadeUp 0.5s ease both;
+    }
+    .consent-title {
+      font-family: 'Teko', sans-serif;
+      font-size: 32px; font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .consent-sub {
+      font-size: 13px; color: var(--text);
+      margin-bottom: 28px; line-height: 1.6;
+    }
+
+    .consent-step {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px;
+      margin-bottom: 10px;
+      display: flex; gap: 12px; align-items: flex-start;
+      cursor: pointer; transition: border-color 0.2s;
+    }
+    .consent-step:hover { border-color: rgba(232,201,122,0.2); }
+    .consent-step.checked { border-color: rgba(232,201,122,0.4); }
+
+    .consent-check {
+      width: 20px; height: 20px; border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.2);
+      flex-shrink: 0; display: flex; align-items: center;
+      justify-content: center; transition: all 0.2s;
+      margin-top: 1px;
+    }
+    .consent-step.checked .consent-check {
+      background: var(--gold); border-color: var(--gold);
+    }
+    .consent-check-mark {
+      display: none; color: #0C0E12;
+      font-size: 12px; font-weight: 700;
+    }
+    .consent-step.checked .consent-check-mark { display: block; }
+
+    .consent-text {
+      font-size: 12px; color: var(--text); line-height: 1.6;
+    }
+    .consent-text strong { color: #fff; }
+
+    .consent-sig-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-dim);
+      margin: 20px 0 8px;
+    }
+    .consent-sig-input {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 10px; padding: 13px 16px;
+      color: #fff; font-size: 14px;
+      font-family: 'DM Mono', monospace;
+      outline: none; margin-bottom: 6px;
+      transition: border-color 0.2s;
+    }
+    .consent-sig-input:focus { border-color: rgba(232,201,122,0.4); }
+    .consent-sig-input::placeholder { color: var(--text-dim); }
+    .consent-date {
+      font-size: 11px; color: var(--text-dim);
+      font-family: 'DM Mono', monospace;
+      margin-bottom: 20px;
+    }
+
+    .consent-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+      border: none; border-radius: 10px; padding: 14px;
+      font-family: 'Teko', sans-serif;
+      font-size: 22px; font-weight: 700; letter-spacing: 0.05em;
+      color: #0C0E12; cursor: pointer; opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .consent-submit.ready { opacity: 1; }
+    .consent-submit.ready:hover { opacity: 0.9; }
+
+    /* ── VAULT SCREEN ── */
+    .vault-screen-inner {
+      display: flex; flex: 1; gap: 0;
+      min-height: calc(100vh - 73px);
+    }
+
+    /* Provably Fair Panel */
+    .pf-panel {
+      width: 33%; min-width: 280px; max-width: 360px;
+      background: rgba(10,11,15,0.8);
+      border-right: 1px solid var(--border);
+      padding: 28px 24px;
+      display: flex; flex-direction: column; gap: 20px;
+      position: sticky; top: 73px;
+      height: calc(100vh - 73px);
+      overflow-y: auto;
+    }
+
+    .pf-title {
+      font-family: 'Teko', sans-serif;
+      font-size: 18px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 4px;
+    }
+    .pf-subtitle {
+      font-size: 11px; color: var(--text-dim); line-height: 1.6;
+    }
+
+    .pf-block {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px;
+    }
+    .pf-label {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-dim);
+      margin-bottom: 6px;
+    }
+    .pf-value {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; color: var(--chrome);
+      word-break: break-all; line-height: 1.5;
+    }
+    .pf-value.gold { color: var(--gold); }
+
+    .pf-how {
+      font-size: 11px; color: var(--text);
+      line-height: 1.7;
+    }
+    .pf-how strong { color: #fff; }
+
+    .pf-verify-btn {
+      width: 100%; padding: 10px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 8px; color: var(--chrome);
+      font-size: 12px; font-weight: 600;
+      font-family: inherit; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .pf-verify-btn:hover { background: rgba(184,200,212,0.06); }
+
+    .pf-responsible {
+      font-size: 10px; color: var(--text-dim);
+      line-height: 1.6; padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Main Vault Content */
+    .vault-content {
+      flex: 1; padding: 32px;
+      display: flex; flex-direction: column; gap: 24px;
+    }
+
+    /* Session header */
+    .session-header {
+      display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .session-title {
+      font-family: 'Teko', sans-serif;
+      font-size: 28px; font-weight: 700; color: #fff;
+    }
+    .session-title span { color: var(--gold); }
+
+    .session-controls {
+      display: flex; gap: 8px;
+    }
+    .ctrl-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 8px 16px;
+      color: var(--chrome); font-size: 12px;
+      font-weight: 600; font-family: inherit;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .ctrl-btn:hover { background: rgba(255,255,255,0.1); }
+    .ctrl-btn.danger { color: rgba(255,100,100,0.7); }
+    .ctrl-btn.danger:hover { border-color: rgba(255,100,100,0.3); color: #ff6b6b; }
+
+    /* Odds bar */
+    .odds-bar {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 16px 20px;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 16px;
+    }
+    .odds-current {
+      font-family: 'Teko', sans-serif;
+      font-size: 32px; font-weight: 700;
+      color: var(--gold); line-height: 1;
+    }
+    .odds-label {
+      font-size: 11px; color: var(--text-dim);
+      margin-top: 2px;
+    }
+    .odds-progress {
+      flex: 1; height: 6px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 100px; overflow: hidden;
+    }
+    .odds-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold-dim), var(--gold));
+      border-radius: 100px;
+      transition: width 0.5s ease;
+    }
+    .odds-spins {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px; color: var(--text-dim);
+      white-space: nowrap;
+    }
+
+    /* Pack Grid */
+    .pack-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+
     @media (max-width: 768px) {
-      .hero-title { font-size: 52px; }
-      .cols-wrap { grid-template-columns: 1fr; gap: 0; }
-      .col-divider { width: 100%; height: 1px; margin: 8px 0; }
-      .col-inner { padding: 0; }
-      .col-header { font-size: 28px; }
-      nav { padding: 16px 20px; }
+      .pack-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .mystery-pack {
+        aspect-ratio: 3/4;
+      }
+      .pack-logo {
+        width: 75%; height: 75%;
+      }
+      .pack-label {
+        font-size: 18px;
+      }
+      .pack-odds-tag {
+        font-size: 13px;
+      }
+      .pack-serial {
+        font-size: 11px;
+      }
+      .pack-bottom-strip {
+        height: 22%;
+        padding: 0 14px;
+      }
+    }
+
+    .mystery-pack {
+      aspect-ratio: 3/4;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.2s;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 10px;
+      padding: 12px;
+    }
+    .mystery-pack::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg,
+        rgba(232,201,122,0.08) 0%,
+        transparent 60%);
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .mystery-pack:hover:not(.opened) {
+      border-color: rgba(232,201,122,0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(232,201,122,0.1);
+    }
+    .mystery-pack:hover:not(.opened)::before { opacity: 1; }
+    .mystery-pack.opened {
+      cursor: default;
+      opacity: 0.5;
+      border-color: rgba(255,255,255,0.05);
+    }
+    .mystery-pack.shuffling {
+      animation: shuffle 0.6s ease;
+    }
+
+    .pack-serial {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; color: rgba(255,255,255,0.6);
+      letter-spacing: 0.06em;
+      position: absolute; top: 8px; left: 10px;
+      z-index: 2;
+    }
+    .pack-label {
+      font-family: 'Teko', sans-serif;
+      font-size: 16px; letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.9); text-transform: uppercase;
+      z-index: 2; text-align: center;
+      line-height: 1;
+    }
+    .pack-odds-tag {
+      font-size: 11px; font-family: 'DM Mono', monospace;
+      color: rgba(232,201,122,0.8);
+      z-index: 2;
+    }
+    .pack-bottom-strip {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 25%;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(4px);
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      z-index: 2;
+      border-top: 1px solid rgba(184,200,212,0.1);
+    }
+
+    /* ── REVEAL OVERLAY ── */
+    .reveal-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 100;
+      background: rgba(0,0,0,0.92);
+      align-items: center; justify-content: center;
+      flex-direction: column;
+    }
+    .reveal-overlay.active { display: flex; }
+
+    .reveal-pack-wrap {
+      width: min(340px, 80vw);
+      aspect-ratio: 6/4;
+      position: relative;
+      margin-bottom: 32px;
+    }
+
+    .reveal-pack {
+      width: 100%; height: 100%;
+      background: var(--panel);
+      border: 1px solid rgba(232,201,122,0.3);
+      border-radius: 16px;
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+    }
+
+    /* Pack tear animation */
+    .pack-top {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 35%;
+      background: var(--panel);
+      border-bottom: 2px dashed rgba(232,201,122,0.3);
+      display: flex; align-items: center; justify-content: center;
+      transform-origin: top center;
+    }
+    .pack-top-text {
+      font-family: 'Teko', sans-serif;
+      font-size: 13px; letter-spacing: 0.15em;
+      color: var(--gold-dim); text-transform: uppercase;
+    }
+
+    .pack-contents {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 65%; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 8px;
+      transform: translateY(100%);
+    }
+    .pack-contents-img {
+      font-size: 48px;
+      filter: drop-shadow(0 4px 16px rgba(232,201,122,0.4));
+    }
+    .pack-contents-label {
+      font-family: 'Teko', sans-serif;
+      font-size: 16px; letter-spacing: 0.08em;
+      color: var(--chrome); text-transform: uppercase;
+    }
+
+    /* Animation states */
+    .reveal-overlay.phase-shake .reveal-pack {
+      animation: packShake 0.8s ease;
+    }
+    .reveal-overlay.phase-tear .pack-top {
+      animation: tearOff 0.4s ease forwards;
+    }
+    .reveal-overlay.phase-slide .pack-contents {
+      animation: slideUp 1.5s ease forwards;
+    }
+
+    @keyframes packShake {
+      0%,100% { transform: rotate(0deg); }
+      15% { transform: rotate(-2deg); }
+      30% { transform: rotate(2deg); }
+      45% { transform: rotate(-1.5deg); }
+      60% { transform: rotate(1.5deg); }
+      75% { transform: rotate(-1deg); }
+    }
+    @keyframes tearOff {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-120%) rotate(-8deg); opacity: 0; }
+    }
+    @keyframes slideUp {
+      0% { transform: translateY(100%); }
+      40% { transform: translateY(20%); }
+      100% { transform: translateY(0); }
+    }
+    @keyframes shuffle {
+      0% { transform: translate(0, 0) rotate(0deg); }
+      25% { transform: translate(8px, -8px) rotate(3deg); }
+      50% { transform: translate(-8px, 4px) rotate(-2deg); }
+      75% { transform: translate(4px, -4px) rotate(1deg); }
+      100% { transform: translate(0, 0) rotate(0deg); }
+    }
+
+    /* Result card */
+    .result-card {
+      text-align: center; max-width: 400px;
+      animation: fadeUp 0.4s ease both;
+    }
+    .result-type {
+      font-family: 'Teko', sans-serif;
+      font-size: 48px; font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .result-type.nickel { color: var(--chrome); }
+    .result-type.gold-result {
+      background: linear-gradient(135deg, #FFD700, var(--gold), #FFD700);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 56px;
+    }
+    .result-desc {
+      font-size: 14px; color: var(--text);
+      line-height: 1.6; margin-bottom: 24px;
+    }
+    .result-desc strong { color: #fff; }
+
+    .result-actions {
+      display: flex; flex-direction: column; gap: 10px;
+      width: 100%;
+    }
+    .result-btn-primary {
+      background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+      border: none; border-radius: 10px; padding: 14px;
+      font-family: 'Teko', sans-serif;
+      font-size: 22px; font-weight: 700; letter-spacing: 0.05em;
+      color: #0C0E12; cursor: pointer; transition: opacity 0.2s;
+    }
+    .result-btn-primary:hover { opacity: 0.9; }
+    .result-btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 10px; padding: 13px;
+      font-family: 'Teko', sans-serif;
+      font-size: 20px; font-weight: 700; letter-spacing: 0.05em;
+      color: var(--chrome); cursor: pointer; transition: background 0.2s;
+    }
+    .result-btn-secondary:hover { background: rgba(255,255,255,0.05); }
+
+    /* Gold celebration */
+    .gold-flash {
+      position: fixed; inset: 0; z-index: 99;
+      background: rgba(232,201,122,0.15);
+      pointer-events: none;
+      animation: goldFlash 0.6s ease forwards;
+    }
+    @keyframes goldFlash {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    /* Confetti */
+    .confetti-piece {
+      position: fixed;
+      width: 8px; height: 8px;
+      border-radius: 2px;
+      pointer-events: none;
+      animation: confettiFall linear forwards;
+      z-index: 101;
+    }
+    @keyframes confettiFall {
+      0% { transform: translateY(-20px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* ── BUYBACK MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.85);
+      align-items: flex-start;
+      justify-content: center;
+      padding: 24px;
+      overflow-y: auto;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-card {
+      background: var(--panel);
+      border: 1px solid rgba(232,201,122,0.3);
+      border-radius: 24px; padding: 28px 24px;
+      max-width: 460px; width: 100%;
+      text-align: center;
+      animation: fadeUp 0.3s ease both;
+      margin: auto;
+    }
+    .modal-icon { font-size: 40px; margin-bottom: 12px; }
+    .modal-title {
+      font-family: 'Teko', sans-serif;
+      font-size: 32px; font-weight: 700;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #FFD700, var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .modal-body {
+      font-size: 13px; color: var(--text);
+      line-height: 1.75; margin-bottom: 20px;
+    }
+    .modal-body strong { color: #fff; }
+    .modal-actions { display: flex; flex-direction: column; gap: 10px; }
+    .modal-timer {
+      font-size: 11px; color: var(--text-dim);
+      font-family: 'DM Mono', monospace;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 768px) {
+      .modal-overlay { padding: 16px; align-items: flex-start; }
+      .modal-card { padding: 20px 16px; border-radius: 16px; margin-top: 12px; }
+      .modal-icon { font-size: 32px; margin-bottom: 8px; }
+      .modal-title { font-size: 26px; }
+      .modal-body { font-size: 12px; margin-bottom: 16px; }
+    }
+
+    /* ── SHOW ME MODAL ── */
+    .showme-modal .modal-card {
+      border-color: rgba(255,100,100,0.2);
+    }
+    .showme-title {
+      font-family: 'Teko', sans-serif;
+      font-size: 28px; color: #ff8c7a;
+      margin-bottom: 8px;
+    }
+
+    /* ── NEW BOX MODAL ── */
+    .newbox-modal .modal-card {
+      border-color: rgba(184,200,212,0.2);
+    }
+
+    /* ── PHYSICAL PACK SCREEN ── */
+    .physical-wrap {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; flex: 1; padding: 48px 24px;
+      text-align: center;
+    }
+    .physical-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px; padding: 40px 32px;
+      width: 100%; max-width: 480px;
+      animation: fadeUp 0.5s ease both;
+    }
+    .physical-title {
+      font-family: 'Teko', sans-serif;
+      font-size: 36px; font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .physical-sub {
+      font-size: 13px; color: var(--text);
+      margin-bottom: 28px; line-height: 1.6;
+    }
+    .qty-control {
+      display: flex; align-items: center;
+      justify-content: center; gap: 20px;
+      margin-bottom: 24px;
+    }
+    .qty-btn {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      color: #fff; font-size: 20px;
+      cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      font-family: inherit; transition: background 0.2s;
+    }
+    .qty-btn:hover { background: rgba(255,255,255,0.1); }
+    .qty-display {
+      font-family: 'Teko', sans-serif;
+      font-size: 52px; font-weight: 700;
+      color: var(--gold); min-width: 60px; text-align: center;
+      line-height: 1;
+    }
+    .qty-total {
+      font-family: 'Teko', sans-serif;
+      font-size: 28px; color: var(--chrome);
+      margin-bottom: 20px;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .vault-screen-inner { flex-direction: column; }
+      .pf-panel {
+        width: 100%; max-width: none; min-width: 0;
+        height: auto; position: static;
+        border-right: none; border-bottom: 1px solid var(--border);
+      }
+      .vault-content { padding: 16px; }
+      .pack-selection { grid-template-columns: 1fr; }
+      .nav { padding: 16px 20px; }
+      .session-header { flex-direction: column; align-items: flex-start; }
+      .session-controls { flex-wrap: wrap; }
+    }
+
+    @media (max-width: 480px) {
+      .pack-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
     }
   </style>
 </head>
 <body>
 <div class="bg-layer"></div>
 <div class="bg-grid"></div>
-<div class="wrap">
-  <nav>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 1: LANDING / PACK SELECTION
+═══════════════════════════════════════════ -->
+<div class="screen active" id="screen-landing">
+  <nav class="nav">
     <a class="nav-logo" href="/">
       <img src="logo.png" alt="SilverDegen" />
       <span class="nav-brand">SilverDegen</span>
     </a>
-    <span style="font-size:12px;color:var(--text-dim);font-family:'DM Mono',monospace;">Members Only · Beta</span>
+    <div class="nav-right">
+      <span class="nav-user">The Vault · Beta</span>
+    </div>
   </nav>
 
-  <div class="hero">
-    <div class="hero-badge">🔒 Members Only · Beta Access</div>
-    <div class="hero-title">Degen Mystery Packs</div>
-    <div class="hero-sub">Choose Your Collection</div>
+  <div class="landing-hero">
+    <div class="vault-badge">🔒 Members Only · Beta Access</div>
+    <div class="vault-title">THE VAULT</div>
+    <div class="vault-subtitle">Mystery Pack — Vault Series</div>
+    <div class="vault-desc">
+      Every pack contains an <strong>authentic WWII War Nickel</strong> — minted 1942-1945 when America rationed nickel for the war effort. Every pack also carries a <strong>1 in 10 chance</strong> of containing a <strong>1g .999 fine gold bar.</strong><br><br>
+      Provably fair. Fully transparent. Every pack ships history.
+    </div>
   </div>
 
-  <div class="cols-wrap">
-    <!-- PHYSICAL LEFT -->
-    <div>
-      <div class="col-header">
-        📦 Physical Packs
-        <span>Mailed directly to you</span>
-      </div>
-      <div class="col-inner">
+  <div class="pack-selection">
+    <!-- Digital Pack -->
+    <div class="pack-card" id="digital-card">
+      <span class="pack-type-badge">⚡ Instant Reveal</span>
+      <div class="pack-name">Digital Pack</div>
+      <div class="pack-price">$49</div>
+      <ul class="pack-features">
+        <li>Instant on-screen reveal animation</li>
+        <li>Provably fair RNG — verify your results</li>
+        <li>Odds improve with every spin</li>
+        <li>Contents ship after reveal</li>
+        <li>Session mechanics &amp; shuffle feature</li>
+      </ul>
+      <a href="#digital" class="pack-select-btn" style="display:block;text-align:center;text-decoration:none;">
+        Open Digital Pack →
+      </a>
+    </div>
 
-      <!-- War Nickel Collection - Physical -->
-      <div class="series-card" id="wnc-physical">
-        <span class="series-badge">⚡ Available Now</span>
-        <div class="series-header">
-          <div class="series-name">War Nickel Collection</div>
-          <div class="series-price">$59.99</div>
-        </div>
-        <img src="wtno.jpg" alt="War Nickel" class="series-img" style="border-radius:8px;" />
-        <div class="series-desc">Every sealed pack contains an authentic 1942–1945 WWII War Nickel. Each pack carries a 1 in 10 chance of a 1g .999 fine gold bar sealed inside. Open it yourself — the mail IS the reveal.</div>
-        <div class="series-meta">
-          <span class="meta-pill">1 in 10 odds</span>
-          <span class="meta-pill">1g Gold Bar chase</span>
-          <span class="meta-pill">Ships in 2 days</span>
-        </div>
-        <a href="vault-wnc.html" class="series-btn">Open This Series →</a>
-      </div>
-
-      <!-- Silver Eagle Collection - Physical -->
-      <div class="series-card" id="ase-physical">
-        <span class="series-badge">⚡ Available Now</span>
-        <div class="series-header">
-          <div class="series-name">Silver Eagle Collection</div>
-          <div class="series-price">$207</div>
-        </div>
-        <img src="silvereagle.jpg" alt="Silver Eagle MS69" class="series-img" style="border-radius:8px;" />
-        <div class="series-desc">Every pack is a graded American Silver Eagle — MS69 or MS70, slabbed and authenticated. One pack in twenty contains a 1/10oz Gold Eagle MS69.</div>
-        <div class="series-meta">
-          <span class="meta-pill">1 in 20 odds</span>
-          <span class="meta-pill">1/10oz Gold Eagle chase</span>
-          <span class="meta-pill">Ships in 2 days</span>
-        </div>
-        <a href="vault-ase.html" class="series-btn">Open This Series →</a>
-      </div>
-
-      <div class="series-coming">
-        <div class="coming-soon">Coming Soon</div>
-        <div class="coming-name">Future Collection</div>
-      </div>
-      </div><!-- end col-inner -->
-    </div><!-- end physical col -->
-
-    <!-- CENTER DIVIDER -->
-    <div class="col-divider"></div>
-
-    <!-- DIGITAL RIGHT -->
-    <div>
-      <div class="col-header">
-        ⚡ Digital Packs
-        <span>Instant on-screen reveal</span>
-      </div>
-      <div class="col-inner">
-
-      <!-- War Nickel Collection - Digital -->
-      <div class="series-card" id="wnc-digital">
-        <span class="series-badge">⚡ Available Now</span>
-        <div class="series-header">
-          <div class="series-name">War Nickel Collection</div>
-          <div class="series-price">$49</div>
-        </div>
-        <img src="wtno.jpg" alt="War Nickel" class="series-img" style="border-radius:8px;" />
-        <div class="series-desc">Every pack contains an authentic 1942–1945 WWII War Nickel. Your odds improve with every spin. One pack in ten holds a 1g .999 fine gold bar — revealed live on screen.</div>
-        <div class="series-meta">
-          <span class="meta-pill">1 in 10 odds</span>
-          <span class="meta-pill">Odds improve each spin</span>
-          <span class="meta-pill">Instant reveal</span>
-        </div>
-        <a href="vault-wnc.html?type=digital" class="series-btn">Open This Series →</a>
-      </div>
-
-      <!-- Silver Eagle Collection - Digital -->
-      <div class="series-card" id="ase-digital">
-        <span class="series-badge">⚡ Available Now</span>
-        <div class="series-header">
-          <div class="series-name">Silver Eagle Collection</div>
-          <div class="series-price">$197</div>
-        </div>
-        <img src="silvereagle.jpg" alt="Silver Eagle MS69" class="series-img" style="border-radius:8px;" />
-        <div class="series-desc">Every pack is a graded American Silver Eagle — MS69 or MS70, slabbed and authenticated. One pack in twenty contains a 1/10oz Gold Eagle MS69, revealed live on screen.</div>
-        <div class="series-meta">
-          <span class="meta-pill">1 in 20 odds</span>
-          <span class="meta-pill">Odds improve each spin</span>
-          <span class="meta-pill">Instant reveal</span>
-        </div>
-        <a href="vault-ase.html?type=digital" class="series-btn">Open This Series →</a>
-      </div>
-
-      <div class="series-coming">
-        <div class="coming-soon">Coming Soon</div>
-        <div class="coming-name">Future Collection</div>
-      </div>
-      </div><!-- end col-inner -->
-    </div><!-- end digital col -->
+    <!-- Physical Pack -->
+    <div class="pack-card" id="physical-card">
+      <span class="pack-type-badge">📦 Mailed To You</span>
+      <div class="pack-name">Physical Pack</div>
+      <div class="pack-price">$59.99</div>
+      <ul class="pack-features">
+        <li>Sealed collectible pack mailed to you</li>
+        <li>Open it yourself — the mail IS the reveal</li>
+        <li>Unlimited quantity per order</li>
+        <li>Gold bar sealed inside if you win</li>
+        <li>COLLECTIBLE NUMISMATICS certified</li>
+      </ul>
+      <a href="#physical" class="pack-select-btn" style="display:block;text-align:center;text-decoration:none;">
+        Order Physical Pack →
+      </a>
+    </div>
   </div>
 
   <div class="odds-disclosure">
-    Mystery packs are collectible merchandise. Odds disclosed per series. All sales final. Please purchase responsibly. <a href="/tos" style="color:var(--gold);text-decoration:none;">Terms of Service →</a>
+    <strong style="color:rgba(255,255,255,0.4);">Odds Disclosure:</strong>
+    Each Mystery Pack — Vault Series: War Nickel Collection contains one authentic 1942-1945 WWII War Nickel.
+    Base odds of receiving a 1g .999 fine gold bar: <strong style="color:rgba(255,255,255,0.4);">1 in 10</strong> per purchase.
+    Digital pack odds improve with consecutive purchases per session.
+    All sales final. Must be 18+. Please purchase responsibly.
   </div>
 </div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 2: AUTH
+═══════════════════════════════════════════ -->
+<div class="screen" id="screen-auth">
+  <nav class="nav">
+    <a class="nav-logo" href="/">
+      <img src="logo.png" alt="SilverDegen" />
+      <span class="nav-brand">SilverDegen</span>
+    </a>
+    <div class="nav-right">
+      <button class="nav-btn" onclick="goBack()">← Back</button>
+    </div>
+  </nav>
+
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="auth-title">Enter The Vault</div>
+      <div class="auth-sub">
+        Degen Club membership required. Sign in to continue.<br>
+        <strong>Not a member?</strong> Register at silverdegen.com/rewards first.
+      </div>
+
+      <button class="google-btn" id="btn-google">
+        <svg width="18" height="18" viewBox="0 0 18 18">
+          <path fill="#4285F4" d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z"/>
+          <path fill="#34A853" d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 0 1-7.18-2.54H1.83v2.07A8 8 0 0 0 8.98 17z"/>
+          <path fill="#FBBC05" d="M4.5 10.52a4.8 4.8 0 0 1 0-3.04V5.41H1.83a8 8 0 0 0 0 7.18l2.67-2.07z"/>
+          <path fill="#EA4335" d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.4L4.5 7.49a4.77 4.77 0 0 1 4.48-3.3z"/>
+        </svg>
+        Continue with Google
+      </button>
+
+      <div class="auth-divider">
+        <div class="auth-divider-line"></div>
+        <div class="auth-divider-text">or</div>
+        <div class="auth-divider-line"></div>
+      </div>
+
+      <div id="auth-login-form">
+        <input id="auth-email" type="email" placeholder="Email address" class="auth-input" />
+        <input id="auth-password" type="password" placeholder="Password" class="auth-input" />
+        <button class="auth-submit" id="btn-login">Sign In →</button>
+        <div class="auth-toggle">
+          Don't have an account? <span id="btn-toggle-login">Create one</span>
+        </div>
+      </div>
+
+      <div id="auth-register-form" style="display:none;">
+        <input id="reg-email" type="email" placeholder="Email address" class="auth-input" />
+        <input id="reg-password" type="password" placeholder="Create password" class="auth-input" />
+        <input id="reg-password2" type="password" placeholder="Confirm password" class="auth-input" />
+        <button class="auth-submit" id="btn-register">Create Account →</button>
+        <div class="auth-toggle">
+          Already have an account? <span id="btn-toggle-reg">Sign in</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 3: CONSENT
+═══════════════════════════════════════════ -->
+<div class="screen" id="screen-consent">
+  <nav class="nav">
+    <a class="nav-logo" href="/">
+      <img src="logo.png" alt="SilverDegen" />
+      <span class="nav-brand">SilverDegen</span>
+    </a>
+  </nav>
+
+  <div class="consent-wrap">
+    <div class="consent-card">
+      <div class="consent-title">Before You Enter</div>
+      <div class="consent-sub">
+        Please read and confirm each statement. This is a one-time agreement.
+      </div>
+
+      <div class="consent-step" id="cs1" onclick="toggleConsent(1)">
+        <div class="consent-check"><span class="consent-check-mark">✓</span></div>
+        <div class="consent-text">
+          <strong>Age Verification:</strong> I confirm I am 18 years of age or older.
+        </div>
+      </div>
+
+      <div class="consent-step" id="cs2" onclick="toggleConsent(2)">
+        <div class="consent-check"><span class="consent-check-mark">✓</span></div>
+        <div class="consent-text">
+          <strong>Product Understanding:</strong> I understand this is a mystery merchandise purchase. Every pack ships a physical product regardless of outcome. War Nickel Collection packs contain authentic 1942-1945 WWII War Nickels. Base odds of 1g gold bar: <strong>1 in 10</strong> per purchase. Digital pack odds improve with consecutive session purchases.
+        </div>
+      </div>
+
+      <div class="consent-step" id="cs3" onclick="toggleConsent(3)">
+        <div class="consent-check"><span class="consent-check-mark">✓</span></div>
+        <div class="consent-text">
+          <strong>Sales Policy:</strong> All sales are final. No refunds on mystery merchandise purchases. Shipping policy varies by prize tier and customer history.
+        </div>
+      </div>
+
+      <div class="consent-step" id="cs4" onclick="toggleConsent(4)">
+        <div class="consent-check"><span class="consent-check-mark">✓</span></div>
+        <div class="consent-text">
+          <strong>Responsible Purchasing:</strong> I am purchasing collectible merchandise for personal enjoyment and will purchase responsibly within my means.
+        </div>
+      </div>
+
+      <div class="consent-step" id="cs5" onclick="toggleConsent(5)">
+        <div class="consent-check"><span class="consent-check-mark">✓</span></div>
+        <div class="consent-text">
+          <strong>Terms of Service:</strong> I have read and agree to the SilverDegen Mystery Pack — Vault Series Terms of Service. I understand the provably fair RNG system and that all results are predetermined before my session begins.
+        </div>
+      </div>
+
+      <div class="consent-sig-label">Your Signature</div>
+      <input
+        id="consent-sig"
+        type="text"
+        placeholder="Type your full legal name"
+        class="consent-sig-input"
+        oninput="checkConsentReady()"
+      />
+      <div class="consent-date" id="consent-date"></div>
+
+      <button class="consent-submit" id="consent-submit-btn">
+        I Agree — Enter The Vault →
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 4: VAULT (DIGITAL)
+═══════════════════════════════════════════ -->
+<div class="screen" id="screen-vault">
+  <nav class="nav">
+    <a class="nav-logo" href="/">
+      <img src="logo.png" alt="SilverDegen" />
+      <span class="nav-brand">SilverDegen</span>
+    </a>
+    <div class="nav-right">
+      <span class="nav-user" id="vault-user-label"></span>
+      <button class="nav-btn" id="btn-sign-out">Sign Out</button>
+    </div>
+  </nav>
+
+  <div class="vault-screen-inner">
+    <!-- Provably Fair Panel -->
+    <div class="pf-panel">
+      <div>
+        <div class="pf-title">⚖ Provably Fair</div>
+        <div class="pf-subtitle">Every result was mathematically determined before your first click. We cannot change it.</div>
+      </div>
+
+      <div class="pf-block">
+        <div class="pf-label">Server Seed (Committed)</div>
+        <div class="pf-value" id="pf-server-hash">—</div>
+      </div>
+
+      <div class="pf-block">
+        <div class="pf-label">Your Session Seed</div>
+        <div class="pf-value" id="pf-client-seed">—</div>
+      </div>
+
+      <div class="pf-block">
+        <div class="pf-label">Box ID</div>
+        <div class="pf-value gold" id="pf-box-id">—</div>
+      </div>
+
+      <div class="pf-block">
+        <div class="pf-label">Session Expires</div>
+        <div class="pf-value" id="pf-expires">—</div>
+      </div>
+
+      <div class="pf-how">
+        <strong>How it works:</strong> Before your session began, our server committed to a random seed (shown above, hashed). Combined with your device seed, the gold bar position was determined before your first click. We cannot alter it. You can verify after your session ends.
+      </div>
+
+      <button class="pf-verify-btn" id="btn-verify">
+        🔍 Verify Past Sessions
+      </button>
+
+      <div class="pf-responsible">
+        Mystery packs are collectible merchandise.<br>
+        Please purchase responsibly.
+        <br><br>
+        <a href="/tos.html" style="color:var(--text-dim);">Terms of Service →</a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="vault-content">
+      <div class="session-header">
+        <div>
+          <div class="session-title">
+            War Nickel Collection
+            <span id="box-number-label">· Box #1</span>
+          </div>
+        </div>
+        <div class="session-controls">
+          <button class="ctrl-btn" id="btn-shuffle">🔀 Shuffle</button>
+          <button class="ctrl-btn" id="btn-new-box">📦 New Box</button>
+          <button class="ctrl-btn danger" id="btn-show-me">👁 Show Me Gold</button>
+        </div>
+      </div>
+
+      <!-- Odds Bar -->
+      <div class="odds-bar">
+        <div>
+          <div class="odds-current" id="odds-display">1 in 10</div>
+          <div class="odds-label">Current odds of gold</div>
+        </div>
+        <div class="odds-progress">
+          <div class="odds-fill" id="odds-fill" style="width:10%"></div>
+        </div>
+        <div class="odds-spins" id="spins-label">0 of 10 opened</div>
+      </div>
+
+      <!-- Pack Grid -->
+      <div class="pack-grid" id="pack-grid"></div>
+
+      <!-- Bottom disclaimer -->
+      <div style="font-size:11px;color:var(--text-dim);text-align:center;padding-top:8px;">
+        Odds: 1 in <span id="odds-inline">10</span> · All sales final · Please purchase responsibly
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 5: PHYSICAL PACK
+═══════════════════════════════════════════ -->
+<div class="screen" id="screen-physical">
+  <nav class="nav">
+    <a class="nav-logo" href="/">
+      <img src="logo.png" alt="SilverDegen" />
+      <span class="nav-brand">SilverDegen</span>
+    </a>
+    <div class="nav-right">
+      <button class="nav-btn" id="btn-back-physical">← Back</button>
+    </div>
+    <div class="physical-card">
+      <div class="physical-title">Physical Mystery Pack</div>
+      <div class="physical-sub">
+        Sealed collectible packs mailed directly to you. Each pack contains one authentic WWII War Nickel — with a 1 in 10 chance of containing a 1g .999 fine gold bar sealed inside. Open it yourself. The mail IS the reveal.
+      </div>
+
+      <div class="qty-control">
+        <button class="qty-btn" id="btn-qty-minus">−</button>
+        <div class="qty-display" id="qty-display">1</div>
+        <button class="qty-btn" id="btn-qty-plus">+</button>
+      </div>
+
+      <div class="qty-total" id="qty-total">Total: $59.99</div>
+
+      <div style="background:rgba(232,201,122,0.06);border:1px solid rgba(232,201,122,0.15);border-radius:12px;padding:14px;margin-bottom:20px;font-size:12px;color:var(--text);line-height:1.7;">
+        <strong style="color:var(--gold);">Odds Disclosure:</strong><br>
+        Each sealed pack: 1 in 10 odds of containing 1g gold bar.<br>
+        Odds are independent per pack.<br>
+        All sales final. Ships within 2 business days.
+      </div>
+
+      <button class="pack-select-btn" id="btn-physical-checkout">
+        Proceed to Checkout →
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     REVEAL OVERLAY
+═══════════════════════════════════════════ -->
+<div class="reveal-overlay" id="reveal-overlay">
+  <div class="reveal-pack-wrap">
+    <div class="reveal-pack" id="reveal-pack">
+      <div class="pack-top" id="pack-top">
+        <span class="pack-top-text">Mystery Pack · Vault Series</span>
+      </div>
+      <div class="pack-contents" id="pack-contents">
+        <div class="pack-contents-img" id="pack-contents-img">🪙</div>
+        <div class="pack-contents-label" id="pack-contents-label"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-card" id="result-card" style="display:none;">
+    <div class="result-type" id="result-type"></div>
+    <div class="result-desc" id="result-desc"></div>
+    <div class="result-actions" id="result-actions"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MODALS
+═══════════════════════════════════════════ -->
+
+<!-- Buyback Modal -->
+<div class="modal-overlay" id="buyback-modal">
+  <div class="modal-card">
+    <img src="goldbar.jpg" alt="1g Gold Bar" style="width:60px;height:82px;object-fit:contain;margin-bottom:12px;filter:drop-shadow(0 4px 16px rgba(232,201,122,0.4));" />
+    <div class="modal-title">You Found The Gold Bar</div>
+    <div class="modal-body">
+      <strong>1g .999 Fine Gold Bar · $190 retail value</strong><br><br>
+      What would you like to do with your gold bar?<br><br>
+      SilverDegen purchases gold collectibles at 6.6% back of spot — the same price a reputable coin shop would offer.
+    </div>
+    <div class="modal-actions">
+      <button class="result-btn-primary" id="btn-ship">
+        📦 Ship This To Me
+      </button>
+      <button class="result-btn-secondary" id="btn-sell-back">
+        💰 Sell Back To SilverDegen — $142.50
+      </button>
+    </div>
+    <div class="modal-timer" id="buyback-timer">This offer expires in 24:00:00</div>
+  </div>
+</div>
+
+<!-- New Box Modal -->
+<div class="modal-overlay newbox-modal" id="newbox-modal">
+  <div class="modal-card">
+    <div class="modal-icon">📦</div>
+    <div class="modal-title" style="color:var(--chrome);">Open New Box?</div>
+    <div class="modal-body">
+      Opening a new box will close your current box permanently.<br><br>
+      Any unopened packs in this box will be gone.
+    </div>
+    <div class="modal-actions">
+      <button class="result-btn-primary" id="btn-confirm-new-box">
+        Open New Box — Fresh Odds
+      </button>
+      <button class="result-btn-secondary" id="btn-cancel-new-box">
+        Keep Playing This Box
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Show Me Modal -->
+<div class="modal-overlay showme-modal" id="showme-modal">
+  <div class="modal-card">
+    <div class="modal-icon">👁</div>
+    <div class="showme-title">Reveal Gold Location?</div>
+    <div class="modal-body">
+      Revealing which pack contained the gold bar will:<br><br>
+      • <strong>Confirm our provably fair RNG</strong> was predetermined<br>
+      • <strong>End your current session immediately</strong><br>
+      • Prevent further purchases from this box<br><br>
+      You can start a fresh session after.
+    </div>
+    <div class="modal-actions">
+      <button class="result-btn-secondary" id="btn-confirm-show-me" style="border-color:rgba(255,100,100,0.3);color:#ff8c7a;">
+        Show Me — End This Session
+      </button>
+      <button class="result-btn-primary" id="btn-cancel-show-me">
+        Keep Playing
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════ -->
+<script src="vault.js"></script>
 </body>
 </html>

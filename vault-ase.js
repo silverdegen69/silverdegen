@@ -838,6 +838,14 @@
       weekday:'long', year:'numeric', month:'long', day:'numeric'
     });
 
+    // ── Auto-select from URL hash (e.g. vault-ase.html#digital) ──
+    const _hash = window.location.hash;
+    if (_hash === '#digital' || _hash === '#physical') {
+      history.replaceState(null, '', window.location.pathname);
+      setTimeout(() => selectPack(_hash.replace('#', '')), 0);
+      return;
+    }
+
     // ── Direct onclick assignment on pack links ──
     const linkDigital  = document.querySelector('a[href="#digital"]');
     const linkPhysical = document.querySelector('a[href="#physical"]');
