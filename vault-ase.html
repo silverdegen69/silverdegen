@@ -936,55 +936,58 @@
   </nav>
 
   <div class="landing-hero">
-    <div class="vault-badge">🔒 Members Only · Beta Access</div>
-    <div class="vault-title">THE VAULT</div>
-    <div class="vault-subtitle">Mystery Pack — Vault Series</div>
+    <div style="margin-bottom:16px;">
+      <a href="vault.html" style="font-size:12px;color:var(--text-dim);text-decoration:none;font-family:'DM Mono',monospace;letter-spacing:0.06em;">← Back to All Collections</a>
+    </div>
+    <div class="vault-badge">⚡ Available Now</div>
+    <div class="vault-title">Silver Eagle Collection</div>
+    <div class="vault-subtitle">Degen Mystery Packs</div>
     <div class="vault-desc">
-      Every pack contains an <strong>authentic WWII War Nickel</strong> — minted 1942-1945 when America rationed nickel for the war effort. Every pack also carries a <strong>1 in 10 chance</strong> of containing a <strong>1g .999 fine gold bar.</strong><br><br>
-      Provably fair. Fully transparent. Every pack ships history.
+      Every pack is a <strong>graded American Silver Eagle</strong> — MS69 or MS70, slabbed and authenticated by PCGS or NGC. Every pack also carries a <strong>1 in 20 chance</strong> of containing a <strong>1/10oz American Gold Eagle MS69.</strong><br><br>
+      Provably fair. Fully transparent. Every pack ships numismatic history.
     </div>
   </div>
 
   <div class="pack-selection">
-    <!-- Digital Pack -->
-    <div class="pack-card" id="digital-card">
-      <span class="pack-type-badge">⚡ Instant Reveal</span>
-      <div class="pack-name">Digital Pack</div>
-      <div class="pack-price">$49</div>
-      <ul class="pack-features">
-        <li>Instant on-screen reveal animation</li>
-        <li>Provably fair RNG — verify your results</li>
-        <li>Odds improve with every spin</li>
-        <li>Contents ship after reveal</li>
-        <li>Session mechanics &amp; shuffle feature</li>
-      </ul>
-      <a href="#digital" class="pack-select-btn" style="display:block;text-align:center;text-decoration:none;">
-        Open Digital Pack →
-      </a>
-    </div>
-
-    <!-- Physical Pack -->
+    <!-- Physical Pack — LEFT -->
     <div class="pack-card" id="physical-card">
       <span class="pack-type-badge">📦 Mailed To You</span>
       <div class="pack-name">Physical Pack</div>
-      <div class="pack-price">$59.99</div>
+      <div class="pack-price">$207</div>
       <ul class="pack-features">
-        <li>Sealed collectible pack mailed to you</li>
+        <li>Sealed graded Silver Eagle mailed to you</li>
+        <li>MS69 or MS70 — PCGS or NGC certified</li>
         <li>Open it yourself — the mail IS the reveal</li>
-        <li>Unlimited quantity per order</li>
-        <li>Gold bar sealed inside if you win</li>
+        <li>Gold Eagle sealed inside if you win</li>
         <li>COLLECTIBLE NUMISMATICS certified</li>
       </ul>
       <a href="#physical" class="pack-select-btn" style="display:block;text-align:center;text-decoration:none;">
         Order Physical Pack →
       </a>
     </div>
+
+    <!-- Digital Pack — RIGHT -->
+    <div class="pack-card" id="digital-card">
+      <span class="pack-type-badge">⚡ Instant Reveal</span>
+      <div class="pack-name">Digital Pack</div>
+      <div class="pack-price">$197</div>
+      <ul class="pack-features">
+        <li>Instant on-screen reveal animation</li>
+        <li>Provably fair RNG — verify your results</li>
+        <li>Odds improve with every spin</li>
+        <li>Graded Silver Eagle ships after reveal</li>
+        <li>Session mechanics &amp; shuffle feature</li>
+      </ul>
+      <a href="#digital" class="pack-select-btn" style="display:block;text-align:center;text-decoration:none;">
+        Open Digital Pack →
+      </a>
+    </div>
   </div>
 
   <div class="odds-disclosure">
     <strong style="color:rgba(255,255,255,0.4);">Odds Disclosure:</strong>
-    Each Mystery Pack — Vault Series: War Nickel Collection contains one authentic 1942-1945 WWII War Nickel.
-    Base odds of receiving a 1g .999 fine gold bar: <strong style="color:rgba(255,255,255,0.4);">1 in 10</strong> per purchase.
+    Each Silver Eagle Collection pack contains one PCGS or NGC certified American Silver Eagle MS69 or MS70.
+    Base odds of receiving a 1/10oz American Gold Eagle MS69: <strong style="color:rgba(255,255,255,0.4);">1 in 20</strong> per purchase.
     Digital pack odds improve with consecutive purchases per session.
     All sales final. Must be 18+. Please purchase responsibly.
   </div>
@@ -1078,7 +1081,7 @@
       <div class="consent-step" id="cs2" onclick="toggleConsent(2)">
         <div class="consent-check"><span class="consent-check-mark">✓</span></div>
         <div class="consent-text">
-          <strong>Product Understanding:</strong> I understand this is a mystery merchandise purchase. Every pack ships a physical product regardless of outcome. War Nickel Collection packs contain authentic 1942-1945 WWII War Nickels. Base odds of 1g gold bar: <strong>1 in 10</strong> per purchase. Digital pack odds improve with consecutive session purchases.
+          <strong>Product Understanding:</strong> I understand this is a mystery merchandise purchase. Every pack ships a physical product regardless of outcome. Silver Eagle Collection packs contain authentic PCGS or NGC certified American Silver Eagles MS69 or MS70. Base odds of 1/10oz Gold Eagle MS69: <strong>1 in 20</strong> per purchase. Digital pack odds improve with consecutive session purchases.
         </div>
       </div>
 
@@ -1184,14 +1187,14 @@
       <div class="session-header">
         <div>
           <div class="session-title">
-            War Nickel Collection
+            Silver Eagle Collection
             <span id="box-number-label">· Box #1</span>
           </div>
         </div>
         <div class="session-controls">
           <button class="ctrl-btn" id="btn-shuffle">🔀 Shuffle</button>
           <button class="ctrl-btn" id="btn-new-box">📦 New Box</button>
-          <button class="ctrl-btn danger" id="btn-show-me">👁 Show Me Gold</button>
+          <button class="ctrl-btn danger" id="btn-show-me">👁 Show Me Gold Eagle</button>
         </div>
       </div>
 
@@ -1233,7 +1236,7 @@
     <div class="physical-card">
       <div class="physical-title">Physical Mystery Pack</div>
       <div class="physical-sub">
-        Sealed collectible packs mailed directly to you. Each pack contains one authentic WWII War Nickel — with a 1 in 10 chance of containing a 1g .999 fine gold bar sealed inside. Open it yourself. The mail IS the reveal.
+        Sealed graded Silver Eagle packs mailed directly to you. Each pack contains one PCGS or NGC certified American Silver Eagle MS69 or MS70 — with a 1 in 20 chance of containing a 1/10oz Gold Eagle MS69 sealed inside. Open it yourself. The mail IS the reveal.
       </div>
 
       <div class="qty-control">
@@ -1246,7 +1249,7 @@
 
       <div style="background:rgba(232,201,122,0.06);border:1px solid rgba(232,201,122,0.15);border-radius:12px;padding:14px;margin-bottom:20px;font-size:12px;color:var(--text);line-height:1.7;">
         <strong style="color:var(--gold);">Odds Disclosure:</strong><br>
-        Each sealed pack: 1 in 10 odds of containing 1g gold bar.<br>
+        Each sealed pack: 1 in 20 odds of containing 1/10oz Gold Eagle MS69.<br>
         Odds are independent per pack.<br>
         All sales final. Ships within 2 business days.
       </div>
@@ -1288,11 +1291,11 @@
 <!-- Buyback Modal -->
 <div class="modal-overlay" id="buyback-modal">
   <div class="modal-card">
-    <img src="goldbar.jpg" alt="1g Gold Bar" style="width:60px;height:82px;object-fit:contain;margin-bottom:12px;filter:drop-shadow(0 4px 16px rgba(232,201,122,0.4));" />
-    <div class="modal-title">You Found The Gold Bar</div>
+    <img src="goldeagle.jpg" alt="1/10oz Gold Eagle MS69" style="width:80px;height:100px;object-fit:contain;margin-bottom:12px;filter:drop-shadow(0 4px 16px rgba(232,201,122,0.4));" />
+    <div class="modal-title">You Found The Gold Eagle</div>
     <div class="modal-body">
-      <strong>1g .999 Fine Gold Bar · $190 retail value</strong><br><br>
-      What would you like to do with your gold bar?<br><br>
+      <strong>1/10oz American Gold Eagle MS69 · ~$580 value</strong><br><br>
+      What would you like to do with your Gold Eagle?<br><br>
       SilverDegen purchases gold collectibles at 6.6% back of spot — the same price a reputable coin shop would offer.
     </div>
     <div class="modal-actions">
@@ -1300,7 +1303,7 @@
         📦 Ship This To Me
       </button>
       <button class="result-btn-secondary" id="btn-sell-back">
-        💰 Sell Back To SilverDegen — $142.50
+        💰 Sell Back To SilverDegen — $520.00
       </button>
     </div>
     <div class="modal-timer" id="buyback-timer">This offer expires in 24:00:00</div>
@@ -1353,6 +1356,6 @@
 <!-- ═══════════════════════════════════════════
      JAVASCRIPT
 ═══════════════════════════════════════════ -->
-<script src="vault.js"></script>
+<script src="vault-ase.js"></script>
 </body>
 </html>
