@@ -565,16 +565,26 @@
     }
     .pack-label {
       font-family: 'Teko', sans-serif;
-      font-size: 14px; letter-spacing: 0.1em;
-      color: rgba(255,255,255,0.5); text-transform: uppercase;
-      position: absolute; bottom: 24px;
+      font-size: 16px; letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.9); text-transform: uppercase;
       z-index: 2; text-align: center;
+      line-height: 1;
     }
     .pack-odds-tag {
-      position: absolute; bottom: 8px; right: 10px;
-      font-size: 10px; font-family: 'DM Mono', monospace;
-      color: rgba(232,201,122,0.6);
+      font-size: 11px; font-family: 'DM Mono', monospace;
+      color: rgba(232,201,122,0.8);
       z-index: 2;
+    }
+    .pack-bottom-strip {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 25%;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(4px);
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      z-index: 2;
+      border-top: 1px solid rgba(184,200,212,0.1);
     }
 
     /* ── REVEAL OVERLAY ── */

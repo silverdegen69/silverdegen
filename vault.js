@@ -205,12 +205,14 @@
         <div class="pack-serial">VLT-${String(i).padStart(3,'0')}</div>
         ${opened
           ? (result === 'gold_bar'
-              ? '<img src="goldbar.jpg" alt="Gold Bar" style="width:52px;height:70px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(232,201,122,0.5));">'
-              : '<img src="wtno.jpg" alt="War Nickel" style="width:64px;height:64px;object-fit:contain;border-radius:50%;">')
+              ? '<img src="goldbar.jpg" alt="Gold Bar" style="width:52px;height:70px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(232,201,122,0.5));position:absolute;top:50%;left:50%;transform:translate(-50%,-62%);">'
+              : '<img src="wtno.jpg" alt="War Nickel" style="width:64px;height:64px;object-fit:contain;border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-62%);">')
           : '<img class="pack-logo" src="logo.png" alt="" />'
         }
-        <div class="pack-label">${opened ? (result === 'gold_bar' ? '🥇 GOLD' : '🪙 NICKEL') : 'Vault Series'}</div>
-        <div class="pack-odds-tag">1:${state.currentOdds}</div>
+        <div class="pack-bottom-strip">
+          <div class="pack-label">${opened ? (result === 'gold_bar' ? '🥇 GOLD' : '🪙 NICKEL') : 'Vault Series'}</div>
+          <div class="pack-odds-tag">1:${state.currentOdds}</div>
+        </div>
       `;
       if (!opened) div.onclick = () => openPack(i);
       grid.appendChild(div);
