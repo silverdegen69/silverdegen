@@ -203,7 +203,12 @@
       div.id        = 'pack-' + i;
       div.innerHTML = `
         <div class="pack-serial">VLT-${String(i).padStart(3,'0')}</div>
-        <img class="pack-logo" src="logo.png" alt="" />
+        ${opened
+          ? (result === 'gold_bar'
+              ? '<div style="font-size:28px;">🏅</div>'
+              : '<img src="wtno.jpg" alt="War Nickel" style="width:36px;height:36px;object-fit:contain;border-radius:50%;">')
+          : '<img class="pack-logo" src="logo.png" alt="" />'
+        }
         <div class="pack-label">${opened ? (result === 'gold_bar' ? '🥇 GOLD' : '🪙 NICKEL') : 'Vault Series'}</div>
         <div class="pack-odds-tag">1:${state.currentOdds}</div>
       `;
@@ -283,11 +288,13 @@
 
     // Set content
     if (result === 'gold_bar') {
-      contImg.textContent   = '🏅';
+      contImg.innerHTML   = '🏅';
+      contImg.style.fontSize = '48px';
       contLabel.textContent = '1g .999 Fine Gold Bar';
       overlay.style.background = 'rgba(0,0,0,0.95)';
     } else {
-      contImg.textContent   = '🪙';
+      contImg.innerHTML   = '<img src="wtno.jpg" alt="1944 War Nickel" style="width:80px;height:80px;object-fit:contain;border-radius:50%;filter:drop-shadow(0 4px 16px rgba(184,200,212,0.4));">';
+      contImg.style.fontSize = 'inherit';
       contLabel.textContent = 'WWII War Nickel';
     }
 
