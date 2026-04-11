@@ -488,14 +488,23 @@
       Server Seed: ${state.session.serverSeed}<br>
       Client Seed: ${state.session.clientSeed}<br>
       Gold was in Pack #${gold} — verify this result in My Sessions.
+      <div style="margin-top:14px;">
+        <button id="btn-start-fresh" style="
+          background:linear-gradient(135deg,var(--gold),var(--gold-dim));
+          border:none;border-radius:8px;padding:10px 24px;
+          font-family:'Teko',sans-serif;font-size:20px;font-weight:700;
+          letter-spacing:0.05em;color:#0C0E12;cursor:pointer;
+          transition:opacity 0.2s;
+        ">Start Fresh Session →</button>
+      </div>
     `;
     content.insertBefore(banner, content.firstChild);
 
-    // After 3 seconds start new session
-    setTimeout(() => {
-      initSession();
+    // Wire the button — no auto reset
+    document.getElementById('btn-start-fresh').addEventListener('click', () => {
       banner.remove();
-    }, 4000);
+      initSession();
+    });
   }
 
   // ── VERIFIER ──
