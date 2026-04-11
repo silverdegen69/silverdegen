@@ -250,12 +250,15 @@
         background: rgba(232,201,122,0.08);
         border: 1px solid rgba(232,201,122,0.2);
         border-radius: 10px; padding: 12px 16px;
-        font-size: 13px; color: var(--gold);
         font-family: 'Teko', sans-serif;
         font-size: 18px; letter-spacing: 0.06em;
-        text-align: center;
+        text-align: center; cursor: pointer;
+        transition: background 0.2s;
       `;
-      lockBanner.textContent = '🏆 GOLD FOUND — THIS BOX IS CLOSED. OPEN A NEW BOX TO CONTINUE.';
+      lockBanner.innerHTML = `<span style="color:var(--gold);">🏆 GOLD FOUND — THIS BOX IS CLOSED.</span> <span style="color:#fff;text-decoration:underline;text-underline-offset:3px;">OPEN A NEW BOX TO CONTINUE →</span>`;
+      lockBanner.addEventListener('click', showNewBoxModal);
+      lockBanner.addEventListener('mouseenter', () => lockBanner.style.background = 'rgba(232,201,122,0.14)');
+      lockBanner.addEventListener('mouseleave', () => lockBanner.style.background = 'rgba(232,201,122,0.08)');
       oddsBar.insertAdjacentElement('afterend', lockBanner);
     }
   }
