@@ -587,11 +587,19 @@
     // ── Hash-based navigation — SES cannot block anchor clicks ──
     function handleHash() {
       const hash = window.location.hash;
-      if (hash === '#digital')  { window.location.hash = ''; selectPack('digital');  }
-      if (hash === '#physical') { window.location.hash = ''; selectPack('physical'); }
+      if (hash === '#digital')  { history.replaceState(null, '', window.location.pathname); selectPack('digital');  }
+      if (hash === '#physical') { history.replaceState(null, '', window.location.pathname); selectPack('physical'); }
     }
     window.addEventListener('hashchange', handleHash);
-    handleHash(); // handle if already set on load
+
+    // Intercept anchor clicks directly as backup
+    document.querySelectorAll('a[href="#digital"], a[href="#physical"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const type = this.getAttribute('href').replace('#', '');
+        selectPack(type);
+      });
+    });
 
     // Auth screen
     const btnBackAuth = document.getElementById('btn-back-auth');
