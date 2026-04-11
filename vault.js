@@ -2,7 +2,7 @@
   const SUPABASE_URL  = 'https://ccgehcbqdrdjvuaflhcw.supabase.co';
   const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjZ2VoY2JxZHJkanZ1YWZsaGN3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4MzU2NTYsImV4cCI6MjA5MTQxMTY1Nn0.0GGaOzuUDxLASi_Bwo0nDB5L1Mp4e6uh7MClq04cnbI';
   const DIGITAL_PRICE  = 49;
-  const PHYSICAL_PRICE = 59.99;
+  const PHYSICAL_PRICE = 59;
 
   // ── STATE ──
   let state = {
