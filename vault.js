@@ -592,9 +592,9 @@
     }
     window.addEventListener('hashchange', handleHash);
 
-    // Intercept anchor clicks directly as backup
+    // Intercept anchor clicks via pointerdown — SES cannot block pointer events
     document.querySelectorAll('a[href="#digital"], a[href="#physical"]').forEach(link => {
-      link.addEventListener('click', function(e) {
+      link.addEventListener('pointerdown', function(e) {
         e.preventDefault();
         const type = this.getAttribute('href').replace('#', '');
         selectPack(type);
