@@ -208,17 +208,18 @@
       div.className = 'mystery-pack' + (opened ? ' opened' : '');
       div.id        = 'pack-' + i;
       div.innerHTML = `
-        <div class="pack-serial">VLT-${String(i).padStart(3,'0')}</div>
+        ${opened ? `<div class="pack-serial">VLT-${String(i).padStart(3,'0')}</div>` : ''}
         ${opened
           ? (result === "gold_eagle"
               ? '<img src="goldeagle.jpg" alt="1/10oz Gold Eagle MS69" style="width:52px;height:70px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(232,201,122,0.5));position:absolute;top:50%;left:50%;transform:translate(-50%,-62%);">'
-              : '<img src="silvereagle.jpg" alt="Silver Eagle MS69" style="width:64px;height:64px;object-fit:contain;border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-62%);">')
-          : '<img class="pack-logo" src="logo.png" alt="" />'
+              : '<img src="silvereagle.jpg" alt="Silver Eagle MS69" style="width:64px;height:64px;object-fit:contain;border-radius:8px;position:absolute;top:50%;left:50%;transform:translate(-50%,-62%);">')
+          : '<img class="pack-logo" src="ase-card.jpg" alt="" />'
         }
+        ${opened ? `
         <div class="pack-bottom-strip">
-          <div class="pack-label">${opened ? (result === "gold_eagle" ? '🏆 GOLD EAGLE' : '🥈 SILVER EAGLE') : 'Vault Series'}</div>
+          <div class="pack-label">${result === 'gold_eagle' ? '🏆 GOLD EAGLE' : '🥈 SILVER EAGLE'}</div>
           <div class="pack-odds-tag">1:${state.currentOdds}</div>
-        </div>
+        </div>` : ''}
       `;
       if (!opened) div.onclick = () => openPack(i);
       grid.appendChild(div);
