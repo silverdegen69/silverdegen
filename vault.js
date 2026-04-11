@@ -205,7 +205,7 @@
         <div class="pack-serial">VLT-${String(i).padStart(3,'0')}</div>
         ${opened
           ? (result === 'gold_bar'
-              ? '<div style="font-size:28px;">🏅</div>'
+              ? '<img src="goldbar.jpg" alt="Gold Bar" style="width:28px;height:38px;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(232,201,122,0.5));">'
               : '<img src="wtno.jpg" alt="War Nickel" style="width:36px;height:36px;object-fit:contain;border-radius:50%;">')
           : '<img class="pack-logo" src="logo.png" alt="" />'
         }
@@ -288,8 +288,8 @@
 
     // Set content
     if (result === 'gold_bar') {
-      contImg.innerHTML   = '🏅';
-      contImg.style.fontSize = '48px';
+      contImg.innerHTML   = '<img src="goldbar.jpg" alt="1g Valcambi Gold Bar" style="width:70px;height:96px;object-fit:contain;filter:drop-shadow(0 4px 24px rgba(232,201,122,0.6));">';
+      contImg.style.fontSize = 'inherit';
       contLabel.textContent = '1g .999 Fine Gold Bar';
       overlay.style.background = 'rgba(0,0,0,0.95)';
     } else {
