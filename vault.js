@@ -160,10 +160,9 @@
     state.session = {
       serverSeed, serverHash, clientSeed,
       startedAt: Date.now(),
-      expiresAt: Date.now() + (24 * 60 * 60 * 1000)
+      expiresAt: Date.now() + (24 * 60 * 60 * 1000),
+      _g: goldPosition
     };
-    // Store gold position in closure — not accessible via state.session.goldPosition
-    let _goldPosition = goldPosition;
     state.spinCount   = 0;
     state.currentOdds = 10;
     state.packResults = Array(10).fill(null);
@@ -435,7 +434,7 @@
     let result;
     if (state.spinCount === 10) {
       result = 'gold_bar'; // guaranteed
-    } else if (packNum === _goldPosition && !state.packResults.includes('gold_bar')) {
+    } else if (packNum === state.session._g && !state.packResults.includes('gold_bar')) {
       result = 'gold_bar';
     } else {
       result = 'war_nickel';
@@ -602,7 +601,7 @@
     alert('Your gold bar is confirmed for shipment. You\'ll receive a tracking number within 3 business days. Congratulations! 🏆');
     // In production: trigger shipping workflow
     if (state.session) {
-      _goldPosition = -1; // reset
+      state.session._g = -1; // reset
     }
     updateOddsUI();
     renderPackGrid();
@@ -642,7 +641,7 @@
 
   function confirmShowMe() {
     closeModal('showme-modal');
-    const gold = _goldPosition;
+    const gold = state.session._g;
     state.goldWon = true; // lock entire grid immediately
 
     // Fade out all non-gold packs
