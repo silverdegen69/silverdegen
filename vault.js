@@ -575,8 +575,8 @@
     } catch(e) { return null; }
   }
 
-  // ── INIT — wire all events via addEventListener (CSP safe) ──
-  document.addEventListener('DOMContentLoaded', () => {
+  // ── INIT — runs immediately since script is at bottom of body ──
+  (function init() {
 
     // Consent date
     const cd = document.getElementById('consent-date');
@@ -584,22 +584,11 @@
       weekday:'long', year:'numeric', month:'long', day:'numeric'
     });
 
-    // ── Hash-based navigation — SES cannot block anchor clicks ──
-    function handleHash() {
-      const hash = window.location.hash;
-      if (hash === '#digital')  { history.replaceState(null, '', window.location.pathname); selectPack('digital');  }
-      if (hash === '#physical') { history.replaceState(null, '', window.location.pathname); selectPack('physical'); }
-    }
-    window.addEventListener('hashchange', handleHash);
-
-    // Intercept anchor clicks via pointerdown — SES cannot block pointer events
-    document.querySelectorAll('a[href="#digital"], a[href="#physical"]').forEach(link => {
-      link.addEventListener('pointerdown', function(e) {
-        e.preventDefault();
-        const type = this.getAttribute('href').replace('#', '');
-        selectPack(type);
-      });
-    });
+    // ── Direct onclick assignment on pack links ──
+    const linkDigital  = document.querySelector('a[href="#digital"]');
+    const linkPhysical = document.querySelector('a[href="#physical"]');
+    if (linkDigital)  linkDigital.onclick  = function(e) { e.preventDefault(); selectPack('digital');  return false; };
+    if (linkPhysical) linkPhysical.onclick = function(e) { e.preventDefault(); selectPack('physical'); return false; };
 
     // Auth screen
     const btnBackAuth = document.getElementById('btn-back-auth');
@@ -671,4 +660,4 @@
     if (btnQtyPlus)    btnQtyPlus.addEventListener('click',    () => adjustQty(1));
     if (btnPhysicalCO) btnPhysicalCO.addEventListener('click', checkoutPhysical);
     if (btnBackPhys)   btnBackPhys.addEventListener('click',   goBack);
-  });
+  })();
