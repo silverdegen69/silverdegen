@@ -25,7 +25,6 @@
     .nav-back:hover { color: #DCE8F0; }
 
     .page { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 90px 24px 60px; }
-
     .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin-bottom: 64px; }
 
     .image-stack { display: flex; flex-direction: column; gap: 12px; }
@@ -57,7 +56,18 @@
     .discount-callout { background: rgba(255,140,122,0.08); border: 1px solid rgba(255,140,122,0.2); border-radius: 10px; padding: 12px 16px; margin-bottom: 20px; font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5; }
     .discount-callout strong { color: #ff8c7a; }
 
-    .shopify-buy-wrap { margin-bottom: 12px; }
+    /* QTY + BUY BUTTON */
+    .buy-section { margin-bottom: 12px; }
+    .qty-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+    .qty-label { font-size: 12px; color: rgba(255,255,255,0.4); font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+    .qty-controls { display: flex; align-items: center; gap: 0; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; overflow: hidden; }
+    .qty-btn { width: 38px; height: 38px; background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; }
+    .qty-btn:hover { background: rgba(255,255,255,0.1); }
+    .qty-num { width: 44px; text-align: center; font-family: 'Teko', sans-serif; font-size: 22px; font-weight: 700; color: #fff; border: none; background: none; outline: none; }
+    .price-display { font-family: 'Teko', sans-serif; font-size: 38px; font-weight: 700; color: #fff; margin-left: auto; }
+    .price-each { font-size: 11px; color: rgba(255,255,255,0.35); text-align: right; margin-top: -4px; margin-bottom: 14px; }
+    .buy-btn { display: block; width: 100%; padding: 18px; border-radius: 12px; background: #DCE8F0; color: #0C0E12; font-family: 'Teko', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: 0.05em; text-align: center; text-decoration: none; transition: background 0.2s, transform 0.15s; border: none; cursor: pointer; }
+    .buy-btn:hover { background: #fff; transform: translateY(-2px); }
     .buy-legal { font-size: 11px; color: rgba(255,255,255,0.25); text-align: center; line-height: 1.5; margin-top: 10px; }
 
     .description-section { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 48px; margin-bottom: 48px; }
@@ -69,8 +79,6 @@
     .desc-card-text { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.6; }
 
     footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 24px; text-align: center; font-size: 11px; color: rgba(255,255,255,0.2); position: relative; z-index: 1; }
-
-    #product-component-1776144999098 { width: 100%; }
 
     @media (max-width: 700px) {
       .product-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -91,7 +99,6 @@
 </nav>
 
 <div class="page">
-
   <div class="product-grid">
 
     <div class="image-stack">
@@ -134,8 +141,19 @@
         <div class="feature"><div class="feature-dot">✓</div>Free US shipping — ships within 3 business days</div>
       </div>
 
-      <div class="shopify-buy-wrap">
-        <div id='product-component-1776144999098'></div>
+      <!-- NATIVE QTY + BUY BUTTON — goes straight to Shopify checkout -->
+      <div class="buy-section">
+        <div class="qty-row">
+          <span class="qty-label">Qty</span>
+          <div class="qty-controls">
+            <button class="qty-btn" onclick="changeQty(-1)">−</button>
+            <input class="qty-num" id="qty" type="number" value="1" min="1" max="69" readonly />
+            <button class="qty-btn" onclick="changeQty(1)">+</button>
+          </div>
+          <div class="price-display" id="priceDisplay">$39.99</div>
+        </div>
+        <div class="price-each" id="priceEach">$39.99 each</div>
+        <button class="buy-btn" onclick="buyNow()">Buy Now →</button>
       </div>
       <div class="buy-legal">Secure checkout powered by Shopify · US orders only · All sales final · Inventory limited to 69</div>
     </div>
@@ -166,176 +184,40 @@
       </div>
     </div>
   </div>
-
 </div>
 
 <footer>© 2026 SilverDegen.com · All sales final · US orders only</footer>
 
-<script type="text/javascript">
-/*<![CDATA[*/
-(function () {
-  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
-  if (window.ShopifyBuy) {
-    if (window.ShopifyBuy.UI) {
-      ShopifyBuyInit();
-    } else {
-      loadScript();
-    }
-  } else {
-    loadScript();
-  }
-  function loadScript() {
-    var script = document.createElement('script');
-    script.async = true;
-    script.src = scriptURL;
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
-    script.onload = ShopifyBuyInit;
-  }
-  function ShopifyBuyInit() {
-    var client = ShopifyBuy.buildClient({
-      domain: '5cpwg5-5v.myshopify.com',
-      storefrontAccessToken: '886cd9abd7808728f3626217312b1e4b',
-    });
-    ShopifyBuy.UI.onReady(client).then(function (ui) {
-      ui.createComponent('product', {
-        id: '7947494228016',
-        node: document.getElementById('product-component-1776144999098'),
-        moneyFormat: '%24%7B%7Bamount%7D%7D',
-        options: {
-          "product": {
-            "styles": {
-              "product": {
-                "@media (min-width: 601px)": {
-                  "max-width": "100%",
-                  "margin-left": "0",
-                  "margin-bottom": "0px"
-                },
-                "text-align": "left"
-              },
-              "title": {
-                "font-size": "0px",
-                "color": "transparent"
-              },
-              "price": {
-                "font-size": "26px",
-                "color": "#ffffff",
-                "font-family": "Teko, sans-serif",
-                "font-weight": "700"
-              },
-              "compareAt": {
-                "font-size": "15px",
-                "color": "rgba(255,255,255,0.4)"
-              },
-              "unitPrice": {
-                "font-size": "15px",
-                "color": "rgba(255,255,255,0.4)"
-              },
-              "button": {
-                "font-family": "Teko, sans-serif",
-                "font-size": "26px",
-                "font-weight": "700",
-                "letter-spacing": "0.05em",
-                "background-color": "#DCE8F0",
-                "color": "#0C0E12",
-                "border-radius": "12px",
-                "padding": "16px 24px",
-                "width": "100%",
-                ":hover": { "background-color": "#ffffff" },
-                ":focus": { "background-color": "#ffffff" }
-              }
-            },
-            "layout": "horizontal",
-            "contents": {
-              "img": false,
-              "imgWithCarousel": false,
-              "description": false
-            },
-            "width": "100%",
-            "text": {
-              "button": "Buy Now →"
-            }
-          },
-          "modalProduct": {
-            "contents": {
-              "img": false,
-              "imgWithCarousel": true,
-              "button": false,
-              "buttonWithQuantity": true
-            },
-            "styles": {
-              "title": {
-                "font-family": "Teko, sans-serif",
-                "font-weight": "700",
-                "font-size": "26px",
-                "color": "#ffffff"
-              },
-              "price": {
-                "font-family": "Teko, sans-serif",
-                "font-weight": "700",
-                "font-size": "22px",
-                "color": "#ffffff"
-              },
-              "button": {
-                "font-family": "Teko, sans-serif",
-                "font-size": "22px",
-                "font-weight": "700",
-                "background-color": "#DCE8F0",
-                "color": "#0C0E12",
-                "border-radius": "12px",
-                ":hover": { "background-color": "#ffffff" }
-              }
-            },
-            "text": { "button": "Add to cart" }
-          },
-          "option": {},
-          "cart": {
-            "text": {
-              "total": "Subtotal",
-              "button": "Checkout"
-            },
-            "styles": {
-              "button": {
-                "font-family": "Teko, sans-serif",
-                "font-size": "22px",
-                "font-weight": "700",
-                "background-color": "#DCE8F0",
-                "color": "#0C0E12",
-                "border-radius": "12px",
-                ":hover": { "background-color": "#ffffff" }
-              },
-              "title": { "color": "#ffffff" },
-              "subtotalText": { "color": "rgba(255,255,255,0.6)" },
-              "subtotal": { "color": "#ffffff" },
-              "notice": { "color": "rgba(255,255,255,0.4)" },
-              "currency": { "color": "#ffffff" },
-              "close": { "color": "rgba(255,255,255,0.5)", ":hover": { "color": "#ffffff" } },
-              "header": { "color": "#ffffff" },
-              "lineItems": { "color": "#ffffff" }
-            }
-          },
-          "toggle": {
-            "styles": {
-              "toggle": {
-                "background-color": "#DCE8F0",
-                ":hover": { "background-color": "#ffffff" }
-              },
-              "count": {
-                "color": "#0C0E12",
-                "font-family": "Teko, sans-serif",
-                "font-weight": "700"
-              },
-              "iconPath": { "fill": "#0C0E12" }
-            }
-          }
-        }
-      });
-    });
-  }
-})();
-/*]]>*/
-</script>
-
 <script>
+  // Shopify product variant ID — get this from your Shopify product page
+  // Products > Medical 420 Retard Card > click the product > copy the variant ID from the URL
+  var VARIANT_ID = ''; // PASTE YOUR VARIANT ID HERE e.g. '44012345678901'
+  var SHOP_DOMAIN = '5cpwg5-5v.myshopify.com';
+
+  var qty = 1;
+  var priceOne = 39.99;
+  var priceTwo = 29.99;
+
+  function changeQty(delta) {
+    qty = Math.max(1, Math.min(69, qty + delta));
+    document.getElementById('qty').value = qty;
+    var unitPrice = qty >= 2 ? priceTwo : priceOne;
+    var total = (unitPrice * qty).toFixed(2);
+    document.getElementById('priceDisplay').textContent = '$' + total;
+    document.getElementById('priceEach').textContent = qty >= 2
+      ? '$' + priceTwo.toFixed(2) + ' each — 2+ discount applied ✓'
+      : '$' + priceOne.toFixed(2) + ' each';
+  }
+
+  function buyNow() {
+    if (!VARIANT_ID) {
+      alert('Variant ID not set — see code comment.');
+      return;
+    }
+    var url = 'https://' + SHOP_DOMAIN + '/cart/' + VARIANT_ID + ':' + qty + '?checkout';
+    window.location.href = url;
+  }
+
   function setImg(src, thumb) {
     document.getElementById('mainImg').src = src;
     document.querySelectorAll('.img-thumb').forEach(t => t.classList.remove('active'));
