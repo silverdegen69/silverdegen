@@ -18,20 +18,16 @@
     .bg { position: fixed; inset: 0; z-index: 0; background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(184,200,212,0.1) 0%, transparent 65%); }
     .bg-grid { position: fixed; inset: 0; z-index: 0; opacity: 0.03; background-image: linear-gradient(rgba(184,200,212,1) 1px, transparent 1px), linear-gradient(90deg, rgba(184,200,212,1) 1px, transparent 1px); background-size: 48px 48px; }
 
-    /* NAV */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(12,14,18,0.95); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.07); padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
     .nav-logo { font-family: 'Teko', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: 0.03em; text-decoration: none; background: linear-gradient(180deg,#FFFFFF 0%,#E8E8E8 15%,#A0A8AF 30%,#4A5560 48%,#8A9BAA 62%,#D0DCE4 78%,#FFFFFF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: flex; align-items: center; gap: 8px; }
     .nav-logo img { width: 32px; height: 32px; object-fit: contain; }
     .nav-back { font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
     .nav-back:hover { color: #DCE8F0; }
 
-    /* PAGE */
     .page { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 90px 24px 60px; }
 
-    /* PRODUCT GRID */
     .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin-bottom: 64px; }
 
-    /* IMAGES */
     .image-stack { display: flex; flex-direction: column; gap: 12px; }
     .img-main { width: 100%; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
     .img-main img { width: 100%; display: block; transition: transform 0.3s; }
@@ -41,36 +37,29 @@
     .img-thumb:hover, .img-thumb.active { border-color: rgba(184,200,212,0.5); }
     .img-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* PRODUCT INFO */
     .product-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(192,57,43,0.15); border: 1px solid rgba(192,57,43,0.3); color: #ff8c7a; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-bottom: 14px; }
     .product-name { font-family: 'Teko', sans-serif; font-size: 48px; font-weight: 700; letter-spacing: 0.02em; line-height: 1; margin-bottom: 6px; background: linear-gradient(180deg,#FFFFFF 0%,#E8E8E8 15%,#A0A8AF 30%,#4A5560 48%,#8A9BAA 62%,#D0DCE4 78%,#FFFFFF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .product-sub { font-size: 13px; color: rgba(255,255,255,0.35); margin-bottom: 20px; letter-spacing: 0.05em; text-transform: uppercase; }
     .product-shipping { font-size: 12px; color: rgba(184,200,212,0.7); font-weight: 600; margin-bottom: 24px; }
 
-    /* FEATURES */
     .features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
     .feature { display: flex; align-items: center; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.75); }
     .feature-dot { width: 20px; height: 20px; border-radius: 50%; background: rgba(184,200,212,0.15); border: 1px solid rgba(184,200,212,0.3); display: flex; align-items: center; justify-content: center; font-size: 10px; color: #DCE8F0; flex-shrink: 0; }
 
-    /* STOCK */
     .stock-bar-wrap { margin-bottom: 20px; }
     .stock-label { display: flex; justify-content: space-between; font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 6px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
     .stock-bar { height: 4px; background: rgba(255,255,255,0.1); border-radius: 100px; overflow: hidden; }
     .stock-fill { height: 100%; background: linear-gradient(90deg, #B8C8D4, #DCE8F0); border-radius: 100px; width: 20%; }
 
-    /* MINTAGE BADGE */
     .mintage-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 14px; border-radius: 100px; margin-bottom: 24px; }
     .mintage-badge span { color: #DCE8F0; }
 
-    /* DISCOUNT CALLOUT */
     .discount-callout { background: rgba(255,140,122,0.08); border: 1px solid rgba(255,140,122,0.2); border-radius: 10px; padding: 12px 16px; margin-bottom: 20px; font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5; }
     .discount-callout strong { color: #ff8c7a; }
 
-    /* SHOPIFY BUY BUTTON WRAPPER */
     .shopify-buy-wrap { margin-bottom: 12px; }
     .buy-legal { font-size: 11px; color: rgba(255,255,255,0.25); text-align: center; line-height: 1.5; margin-top: 10px; }
 
-    /* DESCRIPTION */
     .description-section { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 48px; margin-bottom: 48px; }
     .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(184,200,212,0.6); margin-bottom: 20px; }
     .description-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -79,10 +68,9 @@
     .desc-card-title { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 6px; }
     .desc-card-text { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.6; }
 
-    /* FOOTER */
     footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 24px; text-align: center; font-size: 11px; color: rgba(255,255,255,0.2); position: relative; z-index: 1; }
 
-    #product-component-1776143323192 { width: 100%; }
+    #product-component-1776144999098 { width: 100%; }
 
     @media (max-width: 700px) {
       .product-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -106,7 +94,6 @@
 
   <div class="product-grid">
 
-    <!-- IMAGES — make sure 420-retard-card.jpg is uploaded to your GitHub repo -->
     <div class="image-stack">
       <div class="img-main">
         <img id="mainImg" src="420-retard-card.jpg" alt="The Official Medical 420 Retard Card" />
@@ -118,7 +105,6 @@
       </div>
     </div>
 
-    <!-- INFO -->
     <div class="product-info">
       <div class="product-badge">
         <span style="width:6px;height:6px;border-radius:50%;background:#C0392B;display:inline-block;"></span>
@@ -148,16 +134,13 @@
         <div class="feature"><div class="feature-dot">✓</div>Free US shipping — ships within 3 business days</div>
       </div>
 
-      <!-- SHOPIFY BUY BUTTON — handles inventory, pricing tiers, and checkout -->
       <div class="shopify-buy-wrap">
-        <div id='product-component-1776143323192'></div>
+        <div id='product-component-1776144999098'></div>
       </div>
       <div class="buy-legal">Secure checkout powered by Shopify · US orders only · All sales final · Inventory limited to 69</div>
-
     </div>
   </div>
 
-  <!-- DESCRIPTION -->
   <div class="description-section">
     <div class="section-label">About this product</div>
     <div class="description-grid">
@@ -216,7 +199,7 @@
     ShopifyBuy.UI.onReady(client).then(function (ui) {
       ui.createComponent('product', {
         id: '7947494228016',
-        node: document.getElementById('product-component-1776143323192'),
+        node: document.getElementById('product-component-1776144999098'),
         moneyFormat: '%24%7B%7Bamount%7D%7D',
         options: {
           "product": {
