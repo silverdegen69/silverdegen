@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Official Medical 420 Retard Card | SilverDegen</title>
+  <meta name="description" content="1 gram of .999 fine silver sealed in a wallet-sized card. Custom 420 minted round. Mintage of 69. Free US shipping." />
+  <meta property="og:title" content="The Official Medical 420 Retard Card" />
+  <meta property="og:description" content="1 gram .999 fine silver · Mintage 69 · Wallet card · Free US shipping" />
+  <meta property="og:image" content="https://silverdegen.com/420-retard-card.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', system-ui, sans-serif; background: #0C0E12; color: #fff; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+    .bg { position: fixed; inset: 0; z-index: 0; background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(184,200,212,0.1) 0%, transparent 65%); }
+    .bg-grid { position: fixed; inset: 0; z-index: 0; opacity: 0.03; background-image: linear-gradient(rgba(184,200,212,1) 1px, transparent 1px), linear-gradient(90deg, rgba(184,200,212,1) 1px, transparent 1px); background-size: 48px 48px; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(12,14,18,0.95); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.07); padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Teko', sans-serif; font-size: 28px; font-weight: 700; letter-spacing: 0.03em; text-decoration: none; background: linear-gradient(180deg,#FFFFFF 0%,#E8E8E8 15%,#A0A8AF 30%,#4A5560 48%,#8A9BAA 62%,#D0DCE4 78%,#FFFFFF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: flex; align-items: center; gap: 8px; }
+    .nav-logo img { width: 32px; height: 32px; object-fit: contain; }
+    .nav-back { font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: #DCE8F0; }
+
+    /* PAGE */
+    .page { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 90px 24px 60px; }
+
+    /* PRODUCT GRID */
+    .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; margin-bottom: 64px; }
+
+    /* IMAGES */
+    .image-stack { display: flex; flex-direction: column; gap: 12px; }
+    .img-main { width: 100%; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; }
+    .img-main img { width: 100%; display: block; transition: transform 0.3s; }
+    .img-main:hover img { transform: scale(1.02); }
+    .img-thumbs { display: flex; gap: 10px; }
+    .img-thumb { width: 72px; height: 72px; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; flex-shrink: 0; transition: border-color 0.2s; }
+    .img-thumb:hover, .img-thumb.active { border-color: rgba(184,200,212,0.5); }
+    .img-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* PRODUCT INFO */
+    .product-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(192,57,43,0.15); border: 1px solid rgba(192,57,43,0.3); color: #ff8c7a; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; margin-bottom: 14px; }
+    .product-name { font-family: 'Teko', sans-serif; font-size: 48px; font-weight: 700; letter-spacing: 0.02em; line-height: 1; margin-bottom: 6px; background: linear-gradient(180deg,#FFFFFF 0%,#E8E8E8 15%,#A0A8AF 30%,#4A5560 48%,#8A9BAA 62%,#D0DCE4 78%,#FFFFFF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .product-sub { font-size: 13px; color: rgba(255,255,255,0.35); margin-bottom: 20px; letter-spacing: 0.05em; text-transform: uppercase; }
+    .product-shipping { font-size: 12px; color: rgba(184,200,212,0.7); font-weight: 600; margin-bottom: 24px; }
+
+    /* FEATURES */
+    .features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .feature { display: flex; align-items: center; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.75); }
+    .feature-dot { width: 20px; height: 20px; border-radius: 50%; background: rgba(184,200,212,0.15); border: 1px solid rgba(184,200,212,0.3); display: flex; align-items: center; justify-content: center; font-size: 10px; color: #DCE8F0; flex-shrink: 0; }
+
+    /* STOCK */
+    .stock-bar-wrap { margin-bottom: 20px; }
+    .stock-label { display: flex; justify-content: space-between; font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 6px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+    .stock-bar { height: 4px; background: rgba(255,255,255,0.1); border-radius: 100px; overflow: hidden; }
+    .stock-fill { height: 100%; background: linear-gradient(90deg, #B8C8D4, #DCE8F0); border-radius: 100px; width: 20%; }
+
+    /* MINTAGE BADGE */
+    .mintage-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 14px; border-radius: 100px; margin-bottom: 24px; }
+    .mintage-badge span { color: #DCE8F0; }
+
+    /* DISCOUNT CALLOUT */
+    .discount-callout { background: rgba(255,140,122,0.08); border: 1px solid rgba(255,140,122,0.2); border-radius: 10px; padding: 12px 16px; margin-bottom: 20px; font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+    .discount-callout strong { color: #ff8c7a; }
+
+    /* SHOPIFY BUY BUTTON WRAPPER */
+    .shopify-buy-wrap { margin-bottom: 12px; }
+    .buy-legal { font-size: 11px; color: rgba(255,255,255,0.25); text-align: center; line-height: 1.5; margin-top: 10px; }
+
+    /* DESCRIPTION */
+    .description-section { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 48px; margin-bottom: 48px; }
+    .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(184,200,212,0.6); margin-bottom: 20px; }
+    .description-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .desc-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 20px; }
+    .desc-card-icon { font-size: 24px; margin-bottom: 10px; }
+    .desc-card-title { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 6px; }
+    .desc-card-text { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 24px; text-align: center; font-size: 11px; color: rgba(255,255,255,0.2); position: relative; z-index: 1; }
+
+    #product-component-1776143323192 { width: 100%; }
+
+    @media (max-width: 700px) {
+      .product-grid { grid-template-columns: 1fr; gap: 32px; }
+      .description-grid { grid-template-columns: 1fr; }
+      .product-name { font-size: 36px; }
+    }
+  </style>
+</head>
+<body>
+<div class="bg"></div>
+<div class="bg-grid"></div>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="logo.png" alt="Silver Degen" />SilverDegen
+  </a>
+  <a class="nav-back" href="index.html">← Back to home</a>
+</nav>
+
+<div class="page">
+
+  <div class="product-grid">
+
+    <!-- IMAGES — make sure 420-retard-card.jpg is uploaded to your GitHub repo -->
+    <div class="image-stack">
+      <div class="img-main">
+        <img id="mainImg" src="420-retard-card.jpg" alt="The Official Medical 420 Retard Card" />
+      </div>
+      <div class="img-thumbs">
+        <div class="img-thumb active" onclick="setImg('420-retard-card.jpg', this)">
+          <img src="420-retard-card.jpg" alt="Front" />
+        </div>
+      </div>
+    </div>
+
+    <!-- INFO -->
+    <div class="product-info">
+      <div class="product-badge">
+        <span style="width:6px;height:6px;border-radius:50%;background:#C0392B;display:inline-block;"></span>
+        Limited Mintage — 69 Only
+      </div>
+      <div class="product-name">The Official Medical<br>420 Retard Card</div>
+      <div class="product-sub">1 gram · .999 fine silver · Mintage: 69</div>
+      <div class="product-shipping">🚚 Free US Shipping included</div>
+
+      <div class="mintage-badge">Mintage <span>69 / 69</span> — Never Restocked</div>
+
+      <div class="stock-bar-wrap">
+        <div class="stock-label"><span>Stock remaining</span><span style="color:#ff8c7a;">Selling fast</span></div>
+        <div class="stock-bar"><div class="stock-fill"></div></div>
+      </div>
+
+      <div class="discount-callout">
+        🤙 <strong>Buy 2 or more — automatically drops to $29.99 each.</strong> Discount applied at checkout, no code needed.
+      </div>
+
+      <div class="features">
+        <div class="feature"><div class="feature-dot">✓</div>1 gram .999 fine silver — real metal, real value</div>
+        <div class="feature"><div class="feature-dot">✓</div>Custom 420 Ag .999 round — minted exclusively for this card</div>
+        <div class="feature"><div class="feature-dot">✓</div>Wallet-sized — fits in your card slot</div>
+        <div class="feature"><div class="feature-dot">✓</div>Doctor's orders: smoke weed, buy silver</div>
+        <div class="feature"><div class="feature-dot">✓</div>SilverDegen silver bull on the back · Mintage 69</div>
+        <div class="feature"><div class="feature-dot">✓</div>Free US shipping — ships within 3 business days</div>
+      </div>
+
+      <!-- SHOPIFY BUY BUTTON — handles inventory, pricing tiers, and checkout -->
+      <div class="shopify-buy-wrap">
+        <div id='product-component-1776143323192'></div>
+      </div>
+      <div class="buy-legal">Secure checkout powered by Shopify · US orders only · All sales final · Inventory limited to 69</div>
+
+    </div>
+  </div>
+
+  <!-- DESCRIPTION -->
+  <div class="description-section">
+    <div class="section-label">About this product</div>
+    <div class="description-grid">
+      <div class="desc-card">
+        <div class="desc-card-icon">🪙</div>
+        <div class="desc-card-title">Real Silver</div>
+        <div class="desc-card-text">1 gram of .999 fine silver sealed in a credit-card-sized holder. Custom 420 Ag .999 round on the front. This isn't a novelty — it's real weight, real value, real metal.</div>
+      </div>
+      <div class="desc-card">
+        <div class="desc-card-icon">🌿</div>
+        <div class="desc-card-title">420 Edition</div>
+        <div class="desc-card-text">Doctor's orders right on the card: smoke weed, buy silver. Celebrate 420 the retard way — trading cash for silver stash.</div>
+      </div>
+      <div class="desc-card">
+        <div class="desc-card-icon">🔢</div>
+        <div class="desc-card-title">Mintage: 69</div>
+        <div class="desc-card-text">Only 69 of these exist. Ever. Numbered 69/69 on the back. Once they're gone, they're gone — no reprints, no restocks.</div>
+      </div>
+      <div class="desc-card">
+        <div class="desc-card-icon">📦</div>
+        <div class="desc-card-title">Free US Shipping</div>
+        <div class="desc-card-text">Ships within 3 business days. Fully insured. Discreet packaging — no silver markings on the outside.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>© 2026 SilverDegen.com · All sales final · US orders only</footer>
+
+<script type="text/javascript">
+/*<![CDATA[*/
+(function () {
+  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+  if (window.ShopifyBuy) {
+    if (window.ShopifyBuy.UI) {
+      ShopifyBuyInit();
+    } else {
+      loadScript();
+    }
+  } else {
+    loadScript();
+  }
+  function loadScript() {
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = scriptURL;
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
+    script.onload = ShopifyBuyInit;
+  }
+  function ShopifyBuyInit() {
+    var client = ShopifyBuy.buildClient({
+      domain: '5cpwg5-5v.myshopify.com',
+      storefrontAccessToken: '886cd9abd7808728f3626217312b1e4b',
+    });
+    ShopifyBuy.UI.onReady(client).then(function (ui) {
+      ui.createComponent('product', {
+        id: '7947494228016',
+        node: document.getElementById('product-component-1776143323192'),
+        moneyFormat: '%24%7B%7Bamount%7D%7D',
+        options: {
+          "product": {
+            "styles": {
+              "product": {
+                "@media (min-width: 601px)": {
+                  "max-width": "100%",
+                  "margin-left": "0",
+                  "margin-bottom": "0px"
+                },
+                "text-align": "left"
+              },
+              "title": {
+                "font-size": "0px",
+                "color": "transparent"
+              },
+              "price": {
+                "font-size": "26px",
+                "color": "#ffffff",
+                "font-family": "Teko, sans-serif",
+                "font-weight": "700"
+              },
+              "compareAt": {
+                "font-size": "15px",
+                "color": "rgba(255,255,255,0.4)"
+              },
+              "unitPrice": {
+                "font-size": "15px",
+                "color": "rgba(255,255,255,0.4)"
+              },
+              "button": {
+                "font-family": "Teko, sans-serif",
+                "font-size": "26px",
+                "font-weight": "700",
+                "letter-spacing": "0.05em",
+                "background-color": "#DCE8F0",
+                "color": "#0C0E12",
+                "border-radius": "12px",
+                "padding": "16px 24px",
+                "width": "100%",
+                ":hover": { "background-color": "#ffffff" },
+                ":focus": { "background-color": "#ffffff" }
+              }
+            },
+            "layout": "horizontal",
+            "contents": {
+              "img": false,
+              "imgWithCarousel": false,
+              "description": false
+            },
+            "width": "100%",
+            "text": {
+              "button": "Buy Now →"
+            }
+          },
+          "modalProduct": {
+            "contents": {
+              "img": false,
+              "imgWithCarousel": true,
+              "button": false,
+              "buttonWithQuantity": true
+            },
+            "styles": {
+              "title": {
+                "font-family": "Teko, sans-serif",
+                "font-weight": "700",
+                "font-size": "26px",
+                "color": "#ffffff"
+              },
+              "price": {
+                "font-family": "Teko, sans-serif",
+                "font-weight": "700",
+                "font-size": "22px",
+                "color": "#ffffff"
+              },
+              "button": {
+                "font-family": "Teko, sans-serif",
+                "font-size": "22px",
+                "font-weight": "700",
+                "background-color": "#DCE8F0",
+                "color": "#0C0E12",
+                "border-radius": "12px",
+                ":hover": { "background-color": "#ffffff" }
+              }
+            },
+            "text": { "button": "Add to cart" }
+          },
+          "option": {},
+          "cart": {
+            "text": {
+              "total": "Subtotal",
+              "button": "Checkout"
+            },
+            "styles": {
+              "button": {
+                "font-family": "Teko, sans-serif",
+                "font-size": "22px",
+                "font-weight": "700",
+                "background-color": "#DCE8F0",
+                "color": "#0C0E12",
+                "border-radius": "12px",
+                ":hover": { "background-color": "#ffffff" }
+              },
+              "title": { "color": "#ffffff" },
+              "subtotalText": { "color": "rgba(255,255,255,0.6)" },
+              "subtotal": { "color": "#ffffff" },
+              "notice": { "color": "rgba(255,255,255,0.4)" },
+              "currency": { "color": "#ffffff" },
+              "close": { "color": "rgba(255,255,255,0.5)", ":hover": { "color": "#ffffff" } },
+              "header": { "color": "#ffffff" },
+              "lineItems": { "color": "#ffffff" }
+            }
+          },
+          "toggle": {
+            "styles": {
+              "toggle": {
+                "background-color": "#DCE8F0",
+                ":hover": { "background-color": "#ffffff" }
+              },
+              "count": {
+                "color": "#0C0E12",
+                "font-family": "Teko, sans-serif",
+                "font-weight": "700"
+              },
+              "iconPath": { "fill": "#0C0E12" }
+            }
+          }
+        }
+      });
+    });
+  }
+})();
+/*]]>*/
+</script>
+
+<script>
+  function setImg(src, thumb) {
+    document.getElementById('mainImg').src = src;
+    document.querySelectorAll('.img-thumb').forEach(t => t.classList.remove('active'));
+    thumb.classList.add('active');
+  }
+</script>
+</body>
+</html>
